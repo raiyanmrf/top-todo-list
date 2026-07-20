@@ -1,43 +1,22 @@
-// store the default todolist data to local storage as an array of objects
+export default class Store {
+  static set(key, value = "") {
+    localStorage.setItem(key, value);
+  }
+  static get(key) {
+    const todoList = localStorage.getItem(key);
+    return todoList;
+  }
 
-/*
-mytask = [
+  static isExists(key) {
+    return localStorage.getItem(key) !== null;
+  }
+  static remove(key) {
+    localStorage.removeItem(key);
+  }
 
-{
-name: "todo1",
-desc: "this is a test todo item",
-dueDate: null (for now)
-priority: 0,
-status: incomplete | complete | due
-note: "Nothing to discuss here."
+  static rename(newKey, oldKey) {
+    const value = Store.get(oldKey);
+    Store.remove(oldKey);
+    Store.set(newKey, value);
+  }
 }
-,
-{
-name: "todo2",
-desc: "this is a test todo item",
-dueDate: null (for now)
-priority: 0,
-status: incomplete | complete | due
-note: "Nothing to discuss here."
-}
-
-]
-*/
-const todoListData = [
-  {
-    name: "todo1",
-    desc: "this is a test todo item",
-    dueDate: null,
-    priority: 1,
-    status: "incomplete",
-    note: "Nothing to discuss here.",
-  },
-  {
-    name: "todo2",
-    desc: "this is a test todo item",
-    dueDate: null,
-    priority: 0,
-    status: "incomplete",
-    note: "Nothing to discuss here.",
-  },
-];
