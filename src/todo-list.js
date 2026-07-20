@@ -1,24 +1,24 @@
 export default class TodoList {
-  constructor(name, value = []) {
-    this.name = name;
-    this.value = value;
-    TodoList.store(name, value);
-  }
+  static new(name, value = []) {
+    localStorage.setItem(name, JSON.stringify(value));
 
-  static store(key, value) {
-    localStorage.setItem(key, JSON.stringify(value));
+    return name;
   }
-  static get(key) {
-    const todoList = JSON.parse(localStorage.getItem(key));
+  static get(name) {
+    const todoList = JSON.parse(localStorage.getItem(name));
     return todoList;
   }
 
-  static isExists(key) {
-    return localStorage.getItem(key) !== null;
+  static isExists(name) {
+    return localStorage.getItem(name) !== null;
   }
-  static remove(key) {
-    localStorage.removeItem(key);
+  static remove(name) {
+    localStorage.removeItem(name);
   }
 
-  static updateName;
+  static rename(newName, oldName) {
+    const value = TodoList.get(oldName);
+    TodoList.remove(oldName);
+    TodoList.new(newName, value);
+  }
 }
