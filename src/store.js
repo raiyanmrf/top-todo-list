@@ -19,4 +19,17 @@ export default class Store {
     Store.remove(oldKey);
     Store.set(newKey, value);
   }
+
+  static setProp(prop, value, itemName) {
+    const item = Store.getItem(itemName);
+    // console.log(item);
+    item[prop] = value;
+    Store.setItem(item);
+    // console.log(Store.getItem(item.name));
+  }
+  static getPropValue(prop, itemName) {
+    const item = Store.getItem(itemName);
+    const value = item[prop];
+    return value;
+  }
 }

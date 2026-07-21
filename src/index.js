@@ -1,6 +1,6 @@
 import "./styles.css";
-import TodoList from "./todo-list.js";
 import Store from "./store.js";
+import TodoList from "./todo-list.js";
 import Todo from "./todo.js";
 
 const todoList = new TodoList("abc");
@@ -24,4 +24,9 @@ console.log(todo);
 
 Store.setItem(todo);
 
-console.log(Store.getItem(todo.name));
+// console.log(Store.getItem(todo.name));
+Store.setProp("priority", 1, todo.name);
+
+// console.log(Store.getItem(todo.name));
+
+// console.log(Store.getPropValue("priority", todo.name));
