@@ -1,10 +1,10 @@
 export default class Store {
-  static set(key, value = "") {
-    localStorage.setItem(key, value);
+  static set(obj) {
+    localStorage.setItem(obj.name, JSON.stringify(obj));
   }
   static get(key) {
     const todoList = localStorage.getItem(key);
-    return todoList;
+    return JSON.parse(todoList);
   }
 
   static isExists(key) {

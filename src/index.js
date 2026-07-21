@@ -1,7 +1,11 @@
 import "./styles.css";
 import TodoList from "./todo-list.js";
+import Store from "./store.js";
 
-const name = "todo1";
-const newName = "Raiyan";
-TodoList.new(name);
-TodoList.rename(newName, name);
+const todoList = new TodoList("abc");
+
+console.log(todoList);
+
+Store.set(todoList);
+
+console.log(Store.get(todoList.name));
