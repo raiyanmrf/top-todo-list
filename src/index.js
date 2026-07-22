@@ -30,3 +30,7 @@ Store.setProp("priority", 1, todo.keyName);
 // console.log(Store.getItem(todo.keyName));
 
 console.log(Store.getPropValue("keyName", todo.keyName));
+
+const arr = Store.everyItemsWith("listId", todoList.id);
+
+console.log(arr);

@@ -42,13 +42,16 @@ export default class Store {
     return value;
   }
 
-  //   static everyItemWith(prop, propValue){
-  // let items = [];
+  static everyItemsWith(prop, propValue) {
+    let items = [];
 
-  // for (const key of Object.keys(localStorage)) {
-  //   if(item[prop] && value === propValue) {
+    for (const key of Object.keys(localStorage)) {
+      if (!key.includes(Store.#prefix)) continue;
+      // console.log(key);
+      if (Store.getPropValue(prop, key) === propValue)
+        items.push(Store.getItem(key));
+    }
 
-  //   }
-  // }
-  //   }
+    return items;
+  }
 }
