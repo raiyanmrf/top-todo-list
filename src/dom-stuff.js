@@ -1,4 +1,7 @@
 export default class DomStuff {
+  constructor(tag) {
+    this.elem = DomStuff.create(tag);
+  }
   static create(tag) {
     return document.createElement(tag);
   }
@@ -9,5 +12,13 @@ export default class DomStuff {
 
   static selectAll(identifier) {
     return document.querySelectorAll(identifier);
+  }
+
+  setClass(className, action = "add") {
+    this.elem.classList[action](className);
+  }
+
+  setId(id) {
+    this.elem.id = id;
   }
 }
