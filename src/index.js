@@ -9,7 +9,7 @@ console.log(todoList);
 
 Store.setItem(todoList);
 
-console.log(Store.getItem(todoList.name));
+console.log(Store.getItem(todoList.keyName));
 
 const todo = new Todo(
   "cde",
@@ -24,9 +24,9 @@ console.log(todo);
 
 Store.setItem(todo);
 
-// console.log(Store.getItem(todo.name));
-Store.setProp("priority", 1, todo.name);
+// console.log(Store.getItem(todo.keyName));
+Store.setProp("priority", 1, todo.keyName);
 
-// console.log(Store.getItem(todo.name));
+// console.log(Store.getItem(todo.keyName));
 
-// console.log(Store.getPropValue("priority", todo.name));
+console.log(Store.getPropValue("keyName", todo.keyName));

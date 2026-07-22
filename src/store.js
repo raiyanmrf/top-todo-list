@@ -1,6 +1,15 @@
 export default class Store {
+  static #prefix = "{{todozz}}";
+
+  static #addPrefix(name) {
+    return Store.#prefix + name;
+  }
+  static #removePrefix(name) {
+    return name.replace(Store.#prefix);
+  }
+
   static setItem(obj) {
-    localStorage.setItem(obj.name, JSON.stringify(obj));
+    localStorage.setItem(obj.keyName, JSON.stringify(obj));
   }
   static getItem(key) {
     const todoList = localStorage.getItem(key);
@@ -32,4 +41,14 @@ export default class Store {
     const value = item[prop];
     return value;
   }
+
+  //   static everyItemWith(prop, propValue){
+  // let items = [];
+
+  // for (const key of Object.keys(localStorage)) {
+  //   if(item[prop] && value === propValue) {
+
+  //   }
+  // }
+  //   }
 }
