@@ -1,10 +1,10 @@
 export default class TodoList {
   #prefix = "{{todozz}}";
-  constructor(name, desc = "") {
-    this.name = name;
+  constructor(title, desc = "") {
+    this.title = title;
     this.desc = desc;
     this.status = "active";
     this.id = crypto.randomUUID();
-    this.keyName = this.#prefix + name;
+    this.keyName = this.#prefix + title;
   }
 }

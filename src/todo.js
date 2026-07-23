@@ -2,7 +2,7 @@ export default class Todo {
   #prefix = "{{todozz}}";
 
   constructor(
-    name,
+    title,
     listId,
     desc = "",
     date = "",
@@ -11,14 +11,14 @@ export default class Todo {
     note = "",
   ) {
     this.id = crypto.randomUUID();
-    this.name = name;
+    this.title = title;
     this.desc = desc;
     this.date = date;
     this.status = "incomplete";
     this.priority = priority;
     this.listId = listId;
     this.note = note;
-    this.keyName = this.#prefix + name;
+    this.keyName = this.#prefix + title;
     this.label = label;
   }
 }

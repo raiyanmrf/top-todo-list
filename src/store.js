@@ -1,11 +1,11 @@
 export default class Store {
   static #prefix = "{{todozz}}";
 
-  static #addPrefix(name) {
-    return Store.#prefix + name;
+  static #addPrefix(title) {
+    return Store.#prefix + title;
   }
-  static #removePrefix(name) {
-    return name.replace(Store.#prefix);
+  static #removePrefix(title) {
+    return title.replace(Store.#prefix);
   }
 
   static setItem(obj) {
@@ -23,7 +23,7 @@ export default class Store {
     localStorage.removeItem(key);
   }
 
-  static rename(newKey, oldKey) {
+  static retitle(newKey, oldKey) {
     const value = Store.get(oldKey);
     Store.remove(oldKey);
     Store.set(newKey, value);
@@ -34,7 +34,7 @@ export default class Store {
     // console.log(item);
     item[prop] = value;
     Store.setItem(item);
-    // console.log(Store.getItem(item.name));
+    // console.log(Store.getItem(item.title));
   }
   static getPropValue(prop, itemName) {
     const item = Store.getItem(itemName);

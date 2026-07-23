@@ -25,9 +25,9 @@ export default class DOM {
   }
 
   static todoListTemplate(todoListObj) {
-    const { id, keyName, name } = todoListObj;
+    const { id, keyName, title } = todoListObj;
 
-    const title = DOM.create("h3", { class: "list-title" }, [name]);
+    const heading = DOM.create("h3", { class: "list-title" }, [title]);
     const todos = Store.everyItemsWith("listId", id).map((item) =>
       DOM.todoTemplate(item),
     );
@@ -40,7 +40,7 @@ export default class DOM {
         "data-key": keyName,
         class: "todo-list",
       },
-      [title, ul],
+      [heading, ul],
     );
 
     console.log(todos);
@@ -50,7 +50,7 @@ export default class DOM {
 
   static todoTemplate(todoObj) {
     console.log(todoObj);
-    let { id, keyName, name, priority, desc, date, note, label } = todoObj;
+    let { id, keyName, title, priority, desc, date, note, label } = todoObj;
 
     const actions = DOM.create("span", { class: "actions" }, [
       DOM.create("button", { class: "edit" }, ["E"]),
@@ -58,7 +58,7 @@ export default class DOM {
       DOM.create("button", { class: "note" }, ["N"]),
     ]);
 
-    name = DOM.create("span", { class: "name" }, [name]);
+    title = DOM.create("span", { class: "title" }, [title]);
     priority = DOM.create("span", { class: "priority" }, [priority]);
     desc = DOM.create("span", { class: "desc" }, [desc]);
     date = DOM.create("span", { class: "date" }, [date]);
@@ -71,7 +71,7 @@ export default class DOM {
         "data-key": keyName,
         class: "todo",
       },
-      [name, actions, date, priority, label],
+      [title, actions, date, priority, label],
     );
 
     console.log(li);

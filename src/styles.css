@@ -2,15 +2,15 @@
   display: grid;
   width: fit-content;
   grid-template-areas:
-    "name priority actions"
+    "title priority actions"
     "date date label";
 
   column-gap: 0.3rem;
   row-gap: 0.3rem;
 }
 
-.name {
-  grid-area: name;
+.title {
+  grid-area: title;
   color: green;
 }
 
