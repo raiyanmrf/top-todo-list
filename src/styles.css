@@ -3,7 +3,7 @@
   width: fit-content;
   grid-template-areas:
     "checkbox title priority actions"
-    "date date date label";
+    ".  date date label";
 
   column-gap: 0.3rem;
   row-gap: 0.3rem;
