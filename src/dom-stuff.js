@@ -52,6 +52,11 @@ export default class DOM {
     console.log(todoObj);
     let { id, keyName, title, priority, desc, date, note, label } = todoObj;
 
+    const checkbox = DOM.create("input", {
+      class: "checkbox",
+      type: "checkbox",
+      value: "1",
+    });
     const actions = DOM.create("span", { class: "actions" }, [
       DOM.create("button", { class: "edit" }, ["E"]),
       DOM.create("button", { class: "delete" }, ["D"]),
@@ -71,7 +76,7 @@ export default class DOM {
         "data-key": keyName,
         class: "todo",
       },
-      [title, actions, date, priority, label],
+      [checkbox, title, actions, date, priority, label],
     );
 
     console.log(li);
