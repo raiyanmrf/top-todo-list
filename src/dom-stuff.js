@@ -71,7 +71,7 @@ export default class DOM {
         "data-key": keyName,
         class: "todo",
       },
-      [name, actions, desc, date, label],
+      [name, actions, desc, priority, date, label],
     );
 
     // li.innerHTML = `<div><span class="name">${name}</span>
