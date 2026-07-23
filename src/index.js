@@ -1,5 +1,6 @@
 import "./styles.css";
 import Store from "./store.js";
+import DOM from "./dom-stuff.js";
 import TodoList from "./todo-list.js";
 import Todo from "./todo.js";
 
@@ -34,3 +35,6 @@ console.log(Store.getPropValue("keyName", todo.keyName));
 const arr = Store.everyItemsWith("listId", todoList.id);
 
 console.log(arr);
+
+let main = DOM.select("#content");
+main.appendChild(DOM.todoListTemplate(todoList));

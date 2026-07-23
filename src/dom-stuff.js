@@ -1,9 +1,19 @@
-export default class DomStuff {
-  constructor(tag) {
-    this.elem = DomStuff.create(tag);
-  }
-  static create(tag) {
-    return document.createElement(tag);
+import Store from "./store.js";
+
+export default class DOM {
+  static create(tag, attrs = {}, children = []) {
+    let elem = document.createElement(tag);
+
+    if (attrs) {
+      for (const [key, value] of Object.entries(attrs)) {
+        elem.setAttribute(key, value);
+      }
+    }
+
+    if (children) {
+      elem.append(...children);
+    }
+    return elem;
   }
 
   static select(identifier) {
@@ -14,11 +24,64 @@ export default class DomStuff {
     return document.querySelectorAll(identifier);
   }
 
-  setClass(className, action = "add") {
-    this.elem.classList[action](className);
+  static todoListTemplate(todoListObj) {
+    const { id, keyName, name } = todoListObj;
+
+    const title = DOM.create("h3", { class: "list-title" }, [name]);
+    const todos = Store.everyItemsWith("listId", id).map((item) =>
+      DOM.todoTemplate(item),
+    );
+    const ul = DOM.create("ul", { class: "todos" }, todos);
+
+    const section = DOM.create(
+      "section",
+      {
+        id,
+        "data-key": keyName,
+        class: "todo-list",
+      },
+      [title, ul],
+    );
+
+    console.log(todos);
+
+    return section;
   }
 
-  setId(id) {
-    this.elem.id = id;
+  static todoTemplate(todoObj) {
+    console.log(todoObj);
+    let { id, keyName, name, priority, desc, date, note, label } = todoObj;
+
+    const actions = DOM.create("span", { class: "actions" }, [
+      DOM.create("button", { class: "edit" }, ["E"]),
+      DOM.create("button", { class: "delete" }, ["D"]),
+      DOM.create("button", { class: "note" }, ["N"]),
+    ]);
+
+    name = DOM.create("span", { class: "name" }, [name]);
+    priority = DOM.create("span", { class: "priority" }, [priority]);
+    desc = DOM.create("span", { class: "desc" }, [desc]);
+    date = DOM.create("span", { class: "date" }, [date]);
+    label = DOM.create("span", { class: "label" }, [label]);
+
+    const li = DOM.create(
+      "li",
+      {
+        id,
+        "data-key": keyName,
+        class: "todo",
+      },
+      [name, actions, desc, date, label],
+    );
+
+    // li.innerHTML = `<div><span class="name">${name}</span>
+    //                 <span class="actions"><button class="edit">E</button><button class="delete">D</button><button class="note">N</button></span></div>
+    //                 <div><span class="desc">${desc}</span> <span class="priority">${priority}</span></div>
+    //                 <div><span class="date">today</span> <span class="label"># label</span></div>
+    //                  `;
+
+    console.log(li);
+
+    return li;
   }
 }
