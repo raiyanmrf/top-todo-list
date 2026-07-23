@@ -71,14 +71,8 @@ export default class DOM {
         "data-key": keyName,
         class: "todo",
       },
-      [name, actions, desc, priority, date, label],
+      [name, actions, date, priority, label],
     );
-
-    // li.innerHTML = `<div><span class="name">${name}</span>
-    //                 <span class="actions"><button class="edit">E</button><button class="delete">D</button><button class="note">N</button></span></div>
-    //                 <div><span class="desc">${desc}</span> <span class="priority">${priority}</span></div>
-    //                 <div><span class="date">today</span> <span class="label"># label</span></div>
-    //                  `;
 
     console.log(li);
 
