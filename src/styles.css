@@ -15,12 +15,11 @@
 
 .title {
   grid-area: title;
-  color: green;
 }
 
 .actions {
   grid-area: actions;
-  background-color: violet;
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -30,17 +29,15 @@
 
 .priority {
   grid-area: priority;
-  color: violet;
 }
 
 .date {
   grid-area: date;
-  color: blue;
 }
 
 .label {
   grid-area: label;
-  color: cyan;
+
   justify-self: flex-end;
 }
 

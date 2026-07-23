@@ -58,11 +58,7 @@ export default class DOM {
       type: "checkbox",
       value: "1",
     });
-    const actions = DOM.create("span", { class: "actions" }, [
-      DOM.create("button", { class: "edit" }, ["E"]),
-      DOM.create("button", { class: "delete" }, ["D"]),
-      DOM.create("button", { class: "note" }, ["N"]),
-    ]);
+    const actions = DOM.create("span", { class: "actions" }, DOM.actionBtns());
 
     title = DOM.create("span", { class: "title" }, [title]);
     priority = DOM.create("span", { class: "priority" }, [priority]);
@@ -87,5 +83,13 @@ export default class DOM {
     console.log(li);
 
     return li;
+  }
+
+  static actionBtns() {
+    return [
+      DOM.create("button", { class: "edit" }, ["E"]),
+      DOM.create("button", { class: "delete" }, ["D"]),
+      DOM.create("button", { class: "note" }, ["N"]),
+    ];
   }
 }
