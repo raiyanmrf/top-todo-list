@@ -43,3 +43,7 @@
   color: cyan;
   justify-self: flex-end;
 }
+
+.txt-red {
+  color: red;
+}
