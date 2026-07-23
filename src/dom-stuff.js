@@ -1,3 +1,4 @@
+import DateTime from "./date-time.js";
 import Store from "./store.js";
 
 export default class DOM {
@@ -66,7 +67,7 @@ export default class DOM {
     title = DOM.create("span", { class: "title" }, [title]);
     priority = DOM.create("span", { class: "priority" }, [priority]);
     desc = DOM.create("span", { class: "desc" }, [desc]);
-    date = DOM.create("span", { class: "date" }, [date]);
+    date = DOM.create("span", { class: "date" }, [DateTime.format(date)]);
     label = DOM.create("span", { class: "label" }, [label]);
 
     const li = DOM.create(

@@ -3,6 +3,7 @@ import Store from "./store.js";
 import DOM from "./dom-stuff.js";
 import TodoList from "./todo-list.js";
 import Todo from "./todo.js";
+import DateTime from "./date-time.js";
 
 const todoList = new TodoList("abc");
 
@@ -16,13 +17,13 @@ const todo = new Todo(
   "cde",
   todoList.id,
   "this is a test",
-  null,
+  "2026-07-22T16:42",
   0,
   "#work",
   "this is a test",
 );
 
-console.log(todo);
+// console.log(todo);
 
 Store.setItem(todo);
 
@@ -35,7 +36,9 @@ Store.setItem(todo);
 
 const arr = Store.everyItemsWith("listId", todoList.id);
 
-console.log(arr);
+// console.log(arr);
 
 let main = DOM.select("#content");
 main.appendChild(DOM.todoListTemplate(todoList));
+
+new DateTime();
