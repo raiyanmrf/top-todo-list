@@ -1,11 +1,11 @@
-export default class Store {
-  static #prefix = "{{todozz}}";
+import { PREFIX } from "./index.js";
 
+export default class Store {
   static #addPrefix(title) {
-    return Store.#prefix + title;
+    return PREFIX + title;
   }
   static #removePrefix(title) {
-    return title.replace(Store.#prefix);
+    return title.replace(PREFIX);
   }
 
   static setItem(obj) {
@@ -46,7 +46,7 @@ export default class Store {
     let items = [];
 
     for (const key of Object.keys(localStorage)) {
-      if (!key.includes(Store.#prefix)) continue;
+      if (!key.includes(PREFIX)) continue;
       // console.log(key);
       if (Store.getPropValue(prop, key) === propValue)
         items.push(Store.getItem(key));

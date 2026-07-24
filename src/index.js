@@ -4,7 +4,7 @@ import DOM from "./dom-stuff.js";
 import TodoList from "./todo-list.js";
 import Todo from "./todo.js";
 import DateTime from "./date-time.js";
-
+export const PREFIX = "{{todozz}}";
 const todoList = new TodoList("abc");
 
 console.log(todoList);

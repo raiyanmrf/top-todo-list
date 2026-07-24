@@ -1,5 +1,7 @@
 import DateTime from "./date-time.js";
+import { PREFIX } from "./index.js";
 import Store from "./store.js";
+import TodoList from "./todo-list.js";
 
 export default class DOM {
   static create(tag, attrs = {}, children = []) {
@@ -166,8 +168,10 @@ export default class DOM {
       for (const [key, value] of formData) {
         obj[key] = value;
       }
-      console.log(obj);
-      return obj;
+      obj.keyName = PREFIX + obj.title;
+      Store.setItem(obj);
+
+      console.log(Store.getItem(obj.keyName));
     });
   }
 }
