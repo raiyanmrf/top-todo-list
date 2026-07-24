@@ -92,4 +92,26 @@ export default class DOM {
       DOM.create("button", { class: "note" }, ["N"]),
     ];
   }
+  static formBtns() {
+    return DOM.create("div", { class: "form-submit" }, [
+      DOM.create("button", { typr: "submit" }, ["Save"]),
+      DOM.create("button", { class: "cancel" }, ["cancel"]),
+    ]);
+  }
+
+  static formInputs(children) {
+    return DOM.create("div", { class: "form-input" }, children);
+  }
+
+  static todoListForm(todoList) {
+    let form = DOM.create("form", { id: "todo-list-form", class: "form" }, [
+      DOM.create("button", { class: "cross" }, ["X"]),
+      DOM.formInputs([
+        DOM.create("input", { type: "text", name: "title" }, [todoList.title]),
+        DOM.create("textarea", { name: "desc" }, [todoList.desc]),
+      ]),
+      DOM.formBtns(),
+    ]);
+    return form;
+  }
 }
