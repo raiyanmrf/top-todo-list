@@ -104,9 +104,12 @@ export default class DOM {
   }
 
   static textBox(tag, attrs) {
-    const { type, name, placeholder, label, value } = attrs;
+    const { type, name, placeholder, label, value, objID } = attrs;
+
     let labelElem = label
-      ? DOM.create("label", { class: "input-label", for: name }, [label])
+      ? DOM.create("label", { class: "input-label", for: objID + name }, [
+          label,
+        ])
       : "";
 
     let input = DOM.create(
@@ -115,6 +118,7 @@ export default class DOM {
         type,
         name,
         placeholder,
+        id: objID + name,
       },
       [value],
     );
@@ -122,26 +126,32 @@ export default class DOM {
     return DOM.create("div", { class: "input-wrapper" }, [labelElem, input]);
   }
   static todoListForm(todoList) {
-    let form = DOM.create("form", { id: "todo-list-form", class: "form" }, [
-      DOM.create("button", { class: "cross-btn" }, ["X"]),
-      DOM.formInputs([
-        DOM.textBox("input", {
-          type: "text",
-          name: "title",
-          placeholder: "e.g. Office Equipments",
-          label: "Title",
-          value: todoList.title,
-        }),
-        DOM.textBox("textarea", {
-          type: "",
-          name: "desc",
-          placeholder: "e.g. Get the coffe machine fixed.",
-          label: "Desc..",
-          value: todoList.desc,
-        }),
-      ]),
-      DOM.formBtns(),
-    ]);
+    let form = DOM.create(
+      "form",
+      { id: "todo-list-form", class: "form", "data-id": todoList.id },
+      [
+        DOM.create("button", { class: "cross-btn" }, ["X"]),
+        DOM.formInputs([
+          DOM.textBox("input", {
+            type: "text",
+            name: "title",
+            placeholder: "e.g. Office Equipments",
+            label: "Title",
+            value: todoList.title,
+            objID: todoList.id,
+          }),
+          DOM.textBox("textarea", {
+            type: "",
+            name: "desc",
+            placeholder: "e.g. Get the coffe machine fixed.",
+            label: "Desc..",
+            value: todoList.desc,
+            objID: todoList.id,
+          }),
+        ]),
+        DOM.formBtns(),
+      ],
+    );
     return form;
   }
 }
