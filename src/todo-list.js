@@ -1,6 +1,6 @@
 export default class TodoList {
   #prefix = "{{todozz}}";
-  constructor(title, desc = "") {
+  constructor(title = "", desc = "") {
     this.title = title;
     this.desc = desc;
     this.status = "active";

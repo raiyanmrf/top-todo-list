@@ -2,8 +2,8 @@ export default class Todo {
   #prefix = "{{todozz}}";
 
   constructor(
-    title,
-    listId,
+    title = "",
+    listId = "",
     desc = "",
     date = "",
     priority = 0,
