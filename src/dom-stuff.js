@@ -102,11 +102,14 @@ export default class DOM {
   }
 
   static formInputs(children) {
-    return DOM.create("div", { class: "form-input" }, children);
+    return DOM.create("div", { class: "form-inputs" }, children);
+  }
+  static formSelectInputs(children) {
+    return DOM.create("div", { class: "form-select-inputs" }, children);
   }
 
   static textBox(tag, attrs) {
-    const { type, name, placeholder, label, value, objName } = attrs;
+    const { type, name, placeholder, label, value, objName, children } = attrs;
 
     let labelElem = label
       ? DOM.create("label", { class: "input-label", for: objName + name }, [
@@ -123,10 +126,13 @@ export default class DOM {
         id: objName + name,
         value,
       },
-      [value],
+      children,
     );
 
-    return DOM.create("div", { class: "input-wrapper" }, [labelElem, input]);
+    return DOM.create("div", { class: "textBox" }, [labelElem, input]);
+  }
+  static selectBox(children) {
+    return DOM.create("div", { class: "selectBox" }, children);
   }
   static todoListForm(todoList) {
     let form = DOM.create("form", { id: "todo-list-form", class: "form" }, [
@@ -140,14 +146,72 @@ export default class DOM {
           label: "Title",
           value: todoList.title,
           objName: todoList.id,
+          children: [],
+        }),
+        DOM.textBox("textarea", {
+          type: "",
+          name: "desc",
+          placeholder: "e.g. Get the coffee machine fixed.",
+          label: "Desc..",
+          value: todoList.desc,
+          objName: todoList.id,
+          children: [todoList.desc],
+        }),
+      ]),
+      DOM.formBtns(),
+    ]);
+    return form;
+  }
+  static todoForm(todo) {
+    let form = DOM.create("form", { id: "todo-form", class: "form" }, [
+      DOM.create("button", { class: "cross-btn" }, ["X"]),
+
+      DOM.create("input", { type: "hidden", name: "id", value: todo.id }),
+      DOM.create("input", {
+        type: "hidden",
+        name: "status",
+        value: todo.status,
+      }),
+      DOM.create("input", {
+        type: "hidden",
+        name: "listId",
+        value: todo.listId,
+      }),
+
+      DOM.formInputs([
+        DOM.textBox("input", {
+          type: "text",
+          name: "title",
+          placeholder: "e.g. Office Equipments",
+          label: "Title",
+          value: todo.title,
+          objName: todo.id,
         }),
         DOM.textBox("textarea", {
           type: "",
           name: "desc",
           placeholder: "e.g. Get the coffe machine fixed.",
           label: "Desc..",
-          value: todoList.desc,
-          objName: todoList.id,
+          value: todo.desc,
+          objName: todo.id,
+        }),
+
+        DOM.selectBox([
+          DOM.create(
+            "input",
+            { type: "date", value: todo.date, name: "date" },
+            [todo.date],
+          ),
+          DOM.radioBtns(["low", "medium", "high"], todo.priority, "priority"),
+        ]),
+
+        DOM.textBox("textarea", {
+          type: "",
+          name: "note",
+          placeholder: "e.g. Get the coffe machine fixed.",
+          label: "Note..",
+          value: todo.note,
+          objName: todo.id,
         }),
       ]),
       DOM.formBtns(),
@@ -157,6 +221,26 @@ export default class DOM {
 
   static createEvent(event, elem, callback) {
     elem.addEventListener(event, callback);
+  }
+
+  static radioBtns(items, defaultValue, name) {
+    let radios = items.map((item) => {
+      const label = DOM.create("label", { class: "radio-label", for: item }, [
+        item,
+      ]);
+      const input = DOM.create("input", {
+        type: "radio",
+        name,
+        value: item,
+        id: item,
+      });
+
+      item === defaultValue ? (input.checked = true) : (input.checked = false);
+
+      return DOM.create("span", { class: "radio-btn" }, [label, input]);
+    });
+
+    return DOM.create("span", { class: "radio-btns" }, [...radios]);
   }
 
   static submitEvent(selector) {

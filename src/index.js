@@ -14,7 +14,7 @@ const todoList = new TodoList("abc");
 //   todoList.id,
 //   "this is a test",
 //   "2026-07-24T00:35",
-//   0,
+//   low,
 //   "#work",
 //   "this is a test",
 // );
@@ -52,17 +52,19 @@ const App = () => {
     "My Todo",
     defaultTodoList.id,
     "Description of My Todo.",
-    "2026-07-24T00:35",
-    "High",
+    "2026-07-24",
+    "low",
     "#work",
     "this is a test",
   );
   Store.setItems([defaultTodoList, defaultTodo]);
   main.appendChild(DOM.todoListTemplate(defaultTodoList));
 
-  main.appendChild(DOM.todoListForm(defaultTodoList));
+  // main.appendChild(DOM.todoListForm(defaultTodoList));
+  main.appendChild(DOM.todoForm(new Todo()));
 
-  DOM.submitEvent("#todo-list-form");
+  // DOM.submitEvent("#todo-list-form");
+  DOM.submitEvent("#todo-form");
 };
 
 App();

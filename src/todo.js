@@ -6,7 +6,7 @@ export default class Todo {
     listId = "",
     desc = "",
     date = "",
-    priority = 0,
+    priority = "low",
     label = "",
     note = "",
   ) {
