@@ -41,4 +41,4 @@ const arr = Store.everyItemsWith("listId", todoList.id);
 let main = DOM.select("#content");
 main.appendChild(DOM.todoListTemplate(todoList));
 
-new DateTime();
+main.appendChild(DOM.todoListForm(new TodoList()));

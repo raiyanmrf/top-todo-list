@@ -94,8 +94,8 @@ export default class DOM {
   }
   static formBtns() {
     return DOM.create("div", { class: "form-submit" }, [
-      DOM.create("button", { typr: "submit" }, ["Save"]),
-      DOM.create("button", { class: "cancel" }, ["cancel"]),
+      DOM.create("button", { typr: "submit-btn" }, ["Save"]),
+      DOM.create("button", { class: "cancel-btn" }, ["cancel"]),
     ]);
   }
 
@@ -103,12 +103,42 @@ export default class DOM {
     return DOM.create("div", { class: "form-input" }, children);
   }
 
+  static textBox(tag, attrs) {
+    const { type, name, placeholder, label, value } = attrs;
+    let labelElem = label
+      ? DOM.create("label", { class: "input-label", for: name }, [label])
+      : "";
+
+    let input = DOM.create(
+      tag,
+      {
+        type,
+        name,
+        placeholder,
+      },
+      [value],
+    );
+
+    return DOM.create("div", { class: "input-wrapper" }, [labelElem, input]);
+  }
   static todoListForm(todoList) {
     let form = DOM.create("form", { id: "todo-list-form", class: "form" }, [
-      DOM.create("button", { class: "cross" }, ["X"]),
+      DOM.create("button", { class: "cross-btn" }, ["X"]),
       DOM.formInputs([
-        DOM.create("input", { type: "text", name: "title" }, [todoList.title]),
-        DOM.create("textarea", { name: "desc" }, [todoList.desc]),
+        DOM.textBox("input", {
+          type: "text",
+          name: "title",
+          placeholder: "e.g. Office Equipments",
+          label: "Title",
+          value: todoList.title,
+        }),
+        DOM.textBox("textarea", {
+          type: "",
+          name: "desc",
+          placeholder: "e.g. Get the coffe machine fixed.",
+          label: "Desc..",
+          value: todoList.desc,
+        }),
       ]),
       DOM.formBtns(),
     ]);
