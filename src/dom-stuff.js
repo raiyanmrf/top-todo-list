@@ -104,10 +104,10 @@ export default class DOM {
   }
 
   static textBox(tag, attrs) {
-    const { type, name, placeholder, label, value, objID } = attrs;
+    const { type, name, placeholder, label, value, objName } = attrs;
 
     let labelElem = label
-      ? DOM.create("label", { class: "input-label", for: objID + name }, [
+      ? DOM.create("label", { class: "input-label", for: objName + name }, [
           label,
         ])
       : "";
@@ -118,7 +118,7 @@ export default class DOM {
         type,
         name,
         placeholder,
-        id: objID + name,
+        id: objName + name,
       },
       [value],
     );
@@ -138,7 +138,7 @@ export default class DOM {
             placeholder: "e.g. Office Equipments",
             label: "Title",
             value: todoList.title,
-            objID: todoList.id,
+            objName: todoList.keyName,
           }),
           DOM.textBox("textarea", {
             type: "",
@@ -146,12 +146,27 @@ export default class DOM {
             placeholder: "e.g. Get the coffe machine fixed.",
             label: "Desc..",
             value: todoList.desc,
-            objID: todoList.id,
+            objName: todoList.keyName,
           }),
         ]),
         DOM.formBtns(),
       ],
     );
     return form;
+  }
+
+  static createEvent(event, elem, callback) {
+    elem.addEventListener(event, callback);
+  }
+
+  static submitEvent(selector) {
+    const form = DOM.select(selector);
+
+    DOM.createEvent("submit", form, function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      console.log(formData);
+    });
   }
 }
