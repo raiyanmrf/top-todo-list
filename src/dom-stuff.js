@@ -121,6 +121,7 @@ export default class DOM {
         name,
         placeholder,
         id: objName + name,
+        value,
       },
       [value],
     );
@@ -169,7 +170,7 @@ export default class DOM {
         obj[key] = value;
       }
       obj.keyName = PREFIX + obj.title;
-      Store.setItem(obj);
+      Store.setItems([obj]);
 
       console.log(Store.getItem(obj.keyName));
     });

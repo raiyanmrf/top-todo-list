@@ -7,9 +7,10 @@ export default class Store {
   static #removePrefix(title) {
     return title.replace(PREFIX);
   }
-
-  static setItem(obj) {
-    localStorage.setItem(obj.keyName, JSON.stringify(obj));
+  static setItems(items) {
+    items.forEach((item) => {
+      localStorage.setItem(item.keyName, JSON.stringify(item));
+    });
   }
   static getItem(key) {
     const todoList = localStorage.getItem(key);
@@ -33,7 +34,7 @@ export default class Store {
     const item = Store.getItem(itemName);
     // console.log(item);
     item[prop] = value;
-    Store.setItem(item);
+    Store.setItems([item]);
     // console.log(Store.getItem(item.title));
   }
   static getPropValue(prop, itemName) {
