@@ -42,3 +42,5 @@ let main = DOM.select("#content");
 main.appendChild(DOM.todoListTemplate(todoList));
 
 main.appendChild(DOM.todoListForm(new TodoList()));
+
+DOM.submitEvent("#todo-list-form");

@@ -126,32 +126,29 @@ export default class DOM {
     return DOM.create("div", { class: "input-wrapper" }, [labelElem, input]);
   }
   static todoListForm(todoList) {
-    let form = DOM.create(
-      "form",
-      { id: "todo-list-form", class: "form", "data-id": todoList.id },
-      [
-        DOM.create("button", { class: "cross-btn" }, ["X"]),
-        DOM.formInputs([
-          DOM.textBox("input", {
-            type: "text",
-            name: "title",
-            placeholder: "e.g. Office Equipments",
-            label: "Title",
-            value: todoList.title,
-            objName: todoList.keyName,
-          }),
-          DOM.textBox("textarea", {
-            type: "",
-            name: "desc",
-            placeholder: "e.g. Get the coffe machine fixed.",
-            label: "Desc..",
-            value: todoList.desc,
-            objName: todoList.keyName,
-          }),
-        ]),
-        DOM.formBtns(),
-      ],
-    );
+    let form = DOM.create("form", { id: "todo-list-form", class: "form" }, [
+      DOM.create("button", { class: "cross-btn" }, ["X"]),
+      DOM.create("input", { type: "hidden", name: "id", value: todoList.id }),
+      DOM.formInputs([
+        DOM.textBox("input", {
+          type: "text",
+          name: "title",
+          placeholder: "e.g. Office Equipments",
+          label: "Title",
+          value: todoList.title,
+          objName: todoList.id,
+        }),
+        DOM.textBox("textarea", {
+          type: "",
+          name: "desc",
+          placeholder: "e.g. Get the coffe machine fixed.",
+          label: "Desc..",
+          value: todoList.desc,
+          objName: todoList.id,
+        }),
+      ]),
+      DOM.formBtns(),
+    ]);
     return form;
   }
 
@@ -165,8 +162,12 @@ export default class DOM {
     DOM.createEvent("submit", form, function (e) {
       e.preventDefault();
       const formData = new FormData(form);
-
-      console.log(formData);
+      let obj = {};
+      for (const [key, value] of formData) {
+        obj[key] = value;
+      }
+      console.log(obj);
+      return obj;
     });
   }
 }
