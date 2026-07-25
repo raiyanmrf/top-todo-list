@@ -27,4 +27,10 @@ export default class DOM {
   static createEvent(event, elem, callback) {
     elem.addEventListener(event, callback);
   }
+
+  static svg(svgHTML) {
+    let span = DOM.create("span", { class: "icon" });
+    span.innerHTML = svgHTML;
+    return span;
+  }
 }
