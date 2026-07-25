@@ -15,6 +15,21 @@ export default class Template {
       this.main.append(Template.todoList(todoList)),
     );
   }
+
+  loadAside() {
+    let links = [];
+    this.todoLists.forEach((item) => {
+      links.push(
+        DOM.create("button", { class: "link", id: item.id }, [item.title]),
+      );
+    });
+
+    let addBtn = DOM.create("button", { class: "add-btn", id: "add-list" }, [
+      "Add New List",
+    ]);
+
+    this.aside.append(...links, addBtn);
+  }
   static radioBtns(items, defaultValue, name) {
     let radios = items.map((item) => {
       const label = DOM.create("label", { class: "radio-label", for: item }, [
