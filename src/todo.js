@@ -1,6 +1,6 @@
-export default class Todo {
-  #prefix = "{{todozz}}";
+import { TODO_PREFIX } from "./asset/utility.js";
 
+export default class Todo {
   constructor(
     title = "",
     listId = "",
@@ -18,7 +18,7 @@ export default class Todo {
     this.priority = priority;
     this.listId = listId;
     this.note = note;
-    this.keyName = this.#prefix + title;
+    this.keyName = TODO_PREFIX + title;
     this.label = label;
   }
 }

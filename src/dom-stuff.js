@@ -1,5 +1,3 @@
-import { PREFIX } from "./index.js";
-
 export default class DOM {
   static create(tag, attrs = {}, children = []) {
     let elem = document.createElement(tag);

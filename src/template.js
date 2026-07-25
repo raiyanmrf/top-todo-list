@@ -1,8 +1,20 @@
 import DOM from "./dom-stuff.js";
 import Store from "./store.js";
 import DateTime from "./date-time.js";
+import { LIST_PREFIX } from "./asset/utility.js";
 
 export default class Template {
+  constructor() {
+    this.main = DOM.select("#content");
+    this.aside = DOM.select("#sidebar");
+    this.todoLists = Store.getByKey(LIST_PREFIX);
+  }
+
+  loadTodoLists() {
+    this.todoLists.forEach((todoList) =>
+      this.main.append(Template.todoList(todoList)),
+    );
+  }
   static radioBtns(items, defaultValue, name) {
     let radios = items.map((item) => {
       const label = DOM.create("label", { class: "radio-label", for: item }, [
@@ -137,11 +149,11 @@ export default class Template {
     return form;
   }
 
-  static todoList(todoListObj) {
-    const { id, keyName, title } = todoListObj;
+  static todoList(obj) {
+    const { id, keyName, title } = obj;
 
     const heading = DOM.create("h3", { class: "list-title" }, [title]);
-    const todos = Store.everyItemsWith("listId", id).map((item) =>
+    const todos = Store.itemsByProp("listId", id).map((item) =>
       Template.todoTemplate(item),
     );
     const ul = DOM.create("ul", { class: "todos" }, todos);

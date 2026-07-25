@@ -1,12 +1,6 @@
-import { PREFIX } from "./index.js";
+import { TODO_PREFIX } from "./asset/utility.js";
 
 export default class Store {
-  static #addPrefix(title) {
-    return PREFIX + title;
-  }
-  static #removePrefix(title) {
-    return title.replace(PREFIX);
-  }
   static setItems(items) {
     items.forEach((item) => {
       localStorage.setItem(item.keyName, JSON.stringify(item));
@@ -43,14 +37,25 @@ export default class Store {
     return value;
   }
 
-  static everyItemsWith(prop, propValue) {
+  static itemsByProp(prop, propValue, prefix = TODO_PREFIX) {
     let items = [];
 
     for (const key of Object.keys(localStorage)) {
-      if (!key.includes(PREFIX)) continue;
+      if (!key.includes(prefix)) continue;
       // console.log(key);
       if (Store.getPropValue(prop, key) === propValue)
         items.push(Store.getItem(key));
+    }
+
+    return items;
+  }
+  static getByKey(prefix) {
+    let items = [];
+
+    for (const key of Object.keys(localStorage)) {
+      if (!key.includes(prefix)) continue;
+      // console.log(key);
+      items.push(Store.getItem(key));
     }
 
     return items;
