@@ -28,6 +28,7 @@ const App = () => {
 
   // Template.submitEvent("#todo-list-form");
   Template.submitEvent("#todo-form");
+  Template.actionEvent(".todo");
 };
 
 App();
