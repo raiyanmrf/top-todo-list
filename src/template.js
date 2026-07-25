@@ -19,9 +19,8 @@ export default class Template {
   loadAside() {
     let links = [];
     this.todoLists.forEach((item) => {
-      links.push(
-        DOM.create("button", { class: "link", id: item.id }, [item.title]),
-      );
+      let btn = DOM.create("button", {}, [item.title]);
+      links.push(DOM.create("div", { class: "link", id: item.id }, [btn]));
     });
 
     let addBtn = DOM.create("button", { class: "add-btn", id: "add-list" }, [
