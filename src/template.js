@@ -169,6 +169,7 @@ export default class Template {
       class: "checkbox",
       type: "checkbox",
       value: "1",
+      id: "mark",
     });
     const actions = DOM.create(
       "span",
@@ -203,15 +204,13 @@ export default class Template {
 
   static actionBtns() {
     return [
-      DOM.create("button", { class: "edit" }, ["E"]),
-      DOM.create("button", { class: "delete" }, ["D"]),
-      DOM.create("button", { class: "note" }, ["N"]),
+      DOM.create("button", { id: "edit", class: "action-btn" }, ["E"]),
+      DOM.create("button", { id: "delete", class: "action-btn" }, ["D"]),
     ];
   }
   static formBtns() {
     return DOM.create("div", { class: "form-submit" }, [
       DOM.create("button", { typr: "submit-btn" }, ["Save"]),
-      DOM.create("button", { class: "cancel-btn" }, ["cancel"]),
     ]);
   }
 
@@ -233,6 +232,29 @@ export default class Template {
       Store.setItems([obj]);
 
       console.log(Store.getItem(obj.keyName));
+    });
+  }
+  static actionEvent(selector) {
+    let elem = DOM.select(selector);
+    DOM.createEvent("click", elem, function (e) {
+      e.stopPropagation();
+      const target = e.target;
+      const tagName = target.tagName;
+      // console.log(target.tagName);
+
+      let action = target.id;
+
+      switch (action) {
+        case "mark":
+          console.log("action name: mark");
+          break;
+        case "edit":
+          console.log("action name: edit");
+          break;
+        case "delete":
+          console.log("action name: delete");
+          break;
+      }
     });
   }
 }
