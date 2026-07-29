@@ -1,9 +1,12 @@
-import { format, formatDate, formatRelative, isPast, subDays } from "date-fns";
+import { formatRelative, isPast } from "date-fns";
 
 export default class DateTime {
   static format(baseDate) {
     if (!baseDate) return "";
-    let formattedDate = formatRelative(new Date(baseDate), new Date());
+    let formattedDate = formatRelative(new Date(baseDate), new Date()).replace(
+      /at\s\d+:\d+\s[A-Z]+/i,
+      "",
+    );
     console.log(formattedDate);
     return formattedDate;
   }
