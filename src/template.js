@@ -1,12 +1,20 @@
 import DOM from "./dom-stuff.js";
 import Store from "./store.js";
 import DateTime from "./date-time.js";
-import { ACTIVE_LIST, LIST_PREFIX } from "./asset/utility.js";
+import {
+  ACTIVE_LIST,
+  CONTENT_ID,
+  LIST_PREFIX,
+  MODAL_CLASS,
+  MODAL_CONTENT_CLASS,
+  SIDEBAR_ID,
+} from "./asset/utility.js";
+import TodoList from "./todo-list.js";
 
 export default class Template {
   constructor() {
-    this.main = DOM.select("#content");
-    this.aside = DOM.select("#sidebar");
+    this.main = DOM.select(CONTENT_ID);
+    this.aside = DOM.select(SIDEBAR_ID);
     this.todoLists = Store.getByKey(LIST_PREFIX);
   }
 
@@ -28,6 +36,8 @@ export default class Template {
     ]);
 
     this.aside.append(...links, addBtn);
+
+    Template.clickEvent(SIDEBAR_ID);
   }
   static radioBtns(items, defaultValue, name) {
     let radios = items.map((item) => {
@@ -74,7 +84,7 @@ export default class Template {
   static selectBox(children) {
     return DOM.create("div", { class: "selectBox" }, children);
   }
-  static todoListForm(todoList) {
+  static todoListForm(todoList = new TodoList()) {
     let form = DOM.create("form", { id: "todo-list-form", class: "form" }, [
       DOM.create("button", { class: "cross-btn" }, ["X"]),
       DOM.create("input", { type: "hidden", name: "id", value: todoList.id }),
@@ -259,7 +269,7 @@ export default class Template {
       // console.log(Store.getItem(obj.id));
     });
   }
-  static actionEvent(selector) {
+  static clickEvent(selector) {
     let elem = DOM.select(selector);
     DOM.createEvent("click", elem, function (e) {
       e.stopPropagation();
@@ -279,7 +289,34 @@ export default class Template {
         case "delete":
           console.log("action name: delete");
           break;
+        case "add-list":
+          Template.addFormToContent(Template.todoListForm());
+          break;
+        default:
+          console.log("action name: navigate");
+          break;
       }
     });
+  }
+
+  static addModalToContent(modal) {
+    document.querySelector("d").replaceWith();
+  }
+  static addFormToContent(form) {
+    const modal = Template.createModal(form);
+
+    if (!DOM.replaceWith(modal, MODAL_CLASS)) {
+      const content = DOM.select(CONTENT_ID);
+      content.append(modal);
+    }
+  }
+
+  static createModal(elem) {
+    const modalContent = DOM.create("div", { class: MODAL_CONTENT_CLASS }, [
+      elem,
+    ]);
+    const modal = DOM.create("div", { class: MODAL_CLASS }, [modalContent]);
+
+    return modal;
   }
 }
