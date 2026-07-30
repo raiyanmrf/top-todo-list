@@ -37,7 +37,7 @@ export default class Template {
 
     this.aside.append(...links, addBtn);
 
-    Template.clickEvent(SIDEBAR_ID);
+    Template.clickEvent(this.aside);
   }
   static radioBtns(items, defaultValue, name) {
     let radios = items.map((item) => {
@@ -107,8 +107,10 @@ export default class Template {
           children: [todoList.desc],
         }),
       ]),
+
       Template.formBtns(),
     ]);
+
     return form;
   }
   static todoForm(todo) {
@@ -251,23 +253,22 @@ export default class Template {
     return DOM.create("div", { class: "form-inputs" }, children);
   }
 
-  static submitEvent(selector) {
-    const form = DOM.select(selector);
-
-    DOM.createEvent("submit", form, function (e) {
+  static submitEvent(elem) {
+    DOM.createEvent("submit", elem, function (e) {
       e.preventDefault();
-      const formData = new FormData(form);
+
+      const formData = new FormData(elem);
       let obj = {};
       for (const [key, value] of formData) {
         obj[key] = value;
       }
       Store.setItems([obj]);
 
-      // console.log(Store.getItem(obj.id));
+      console.log(Store.getItem(obj.id));
     });
   }
-  static clickEvent(selector) {
-    let elem = DOM.select(selector);
+  static clickEvent(elem) {
+    console.log(elem);
     DOM.createEvent("click", elem, function (e) {
       e.stopPropagation();
       const target = e.target;
@@ -289,6 +290,8 @@ export default class Template {
         case "add-list":
           Template.addFormToContent(Template.todoListForm());
           break;
+        case "close-btn":
+          elem.remove();
         default:
           console.log("action name: navigate");
           break;
@@ -296,25 +299,24 @@ export default class Template {
     });
   }
 
-  static addModalToContent(modal) {
-    document.querySelector("d").replaceWith();
-  }
   static addFormToContent(form) {
     const modal = Template.createModal(form);
 
-    if (!DOM.replaceWith(modal, MODAL_CLASS)) {
+    if (!DOM.replaceWith(modal, MODAL_ID)) {
       const content = DOM.select(CONTENT_ID);
       content.append(modal);
     }
+
+    Template.clickEvent(modal);
+    Template.submitEvent(form);
   }
 
   static createModal(elem) {
-    const closeBtn = DOM.create("span", { class: "close" }, ["\u00D7"]);
+    const closeBtn = DOM.create("span", { id: "close-btn" }, ["\u00D7"]);
     const modalContent = DOM.create("div", { class: "modal-content" }, [
       closeBtn,
       elem,
     ]);
-    const modal = DOM.create("div", { class: "modal" }, [modalContent]);
 
     return modal;
   }
