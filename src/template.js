@@ -310,13 +310,11 @@ export default class Template {
 
   static createModal(elem) {
     const closeBtn = DOM.create("span", { class: "close" }, ["\u00D7"]);
-    const modalContent = DOM.create("div", { class: MODAL_CONTENT_CLASS }, [
+    const modalContent = DOM.create("div", { class: "modal-content" }, [
+      closeBtn,
       elem,
     ]);
-    const modal = DOM.create("div", { class: MODAL_CLASS }, [
-      closeBtn,
-      modalContent,
-    ]);
+    const modal = DOM.create("div", { class: "modal" }, [modalContent]);
 
     return modal;
   }
