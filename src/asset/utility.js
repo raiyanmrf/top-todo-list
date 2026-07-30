@@ -4,6 +4,8 @@ export const TODO_PREFIX = "{{todozz}}";
 export const ACTIVE_LIST = "active-todoList";
 export const SIDEBAR_ID = "#sidebar";
 export const CONTENT_ID = "#content";
+export const MODAL_CLASS = ".modal";
+export const MODAL_CONTENT_CLASS = ".modal-content";
 
 // let defaultTodoList = new TodoList(
 //   "My Todo List",
