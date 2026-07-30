@@ -26,6 +26,17 @@ export default class DOM {
     elem.addEventListener(event, callback);
   }
 
+  static replaceWith(newElem, oldElemSelector) {
+    const oldElem = DOM.select(oldElemSelector);
+    if (oldElem) {
+      oldElem.replaceWith(newElem);
+
+      return true;
+    }
+
+    return false;
+  }
+
   static svg(svgHTML) {
     let span = DOM.create("span", { class: "icon" });
     span.innerHTML = svgHTML;
