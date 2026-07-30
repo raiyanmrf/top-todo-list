@@ -1,7 +1,7 @@
 import DOM from "./dom-stuff.js";
 import Store from "./store.js";
 import DateTime from "./date-time.js";
-import { LIST_PREFIX } from "./asset/utility.js";
+import { ACTIVE_LIST, LIST_PREFIX } from "./asset/utility.js";
 
 export default class Template {
   constructor() {
@@ -182,13 +182,13 @@ export default class Template {
       [heading, ul],
     );
 
-    console.log(todos);
+    // console.log(todos);
 
     return section;
   }
 
   static todoTemplate(todoObj) {
-    console.log(todoObj);
+    // console.log(todoObj);
     let { id, title, priority, desc, date, note, label } = todoObj;
 
     const checkbox = DOM.create("input", {
@@ -223,7 +223,7 @@ export default class Template {
       [checkbox, title, actions, date, priority, label],
     );
 
-    console.log(li);
+    // console.log(li);
 
     return li;
   }
@@ -256,7 +256,7 @@ export default class Template {
       }
       Store.setItems([obj]);
 
-      console.log(Store.getItem(obj.id));
+      // console.log(Store.getItem(obj.id));
     });
   }
   static actionEvent(selector) {

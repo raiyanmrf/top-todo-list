@@ -7,14 +7,14 @@ export default class DateTime {
       /at\s\d+:\d+\s[A-Z]+/i,
       "",
     );
-    console.log(formattedDate);
+    // console.log(formattedDate);
     return formattedDate;
   }
 
   static isLate(baseDate) {
     if (!baseDate) return false;
     let late = isPast(new Date(baseDate));
-    console.log(late);
+    // console.log(late);
     return late;
   }
 }
