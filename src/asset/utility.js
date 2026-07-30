@@ -1,5 +1,7 @@
 export const LIST_PREFIX = "{{todolistzz}}";
 export const TODO_PREFIX = "{{todozz}}";
+
+export const ACTIVE_LIST = "active-todoList";
 // let defaultTodoList = new TodoList(
 //   "My Todo List",
 //   "Description of My Todo List",
