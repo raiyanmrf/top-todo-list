@@ -86,7 +86,6 @@ export default class Template {
   }
   static todoListForm(todoList = new TodoList()) {
     let form = DOM.create("form", { id: "todo-list-form", class: "form" }, [
-      DOM.create("button", { class: "cross-btn" }, ["X"]),
       DOM.create("input", { type: "hidden", name: "id", value: todoList.id }),
       Template.formInputs([
         Template.textBox("input", {
@@ -114,8 +113,6 @@ export default class Template {
   }
   static todoForm(todo) {
     let form = DOM.create("form", { id: "todo-form", class: "form" }, [
-      DOM.create("button", { class: "cross-btn" }, ["X"]),
-
       DOM.create("input", { type: "hidden", name: "id", value: todo.id }),
       DOM.create("input", {
         type: "hidden",
@@ -312,10 +309,14 @@ export default class Template {
   }
 
   static createModal(elem) {
+    const closeBtn = DOM.create("span", { class: "close" }, ["\u00D7"]);
     const modalContent = DOM.create("div", { class: MODAL_CONTENT_CLASS }, [
       elem,
     ]);
-    const modal = DOM.create("div", { class: MODAL_CLASS }, [modalContent]);
+    const modal = DOM.create("div", { class: MODAL_CLASS }, [
+      closeBtn,
+      modalContent,
+    ]);
 
     return modal;
   }
