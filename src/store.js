@@ -6,9 +6,17 @@ export default class Store {
       localStorage.setItem(item.id, JSON.stringify(item));
     });
   }
+  static setOption(key, value) {
+    localStorage.setItem(key, value);
+  }
+
   static getItem(key) {
     const todoList = localStorage.getItem(key);
     return JSON.parse(todoList);
+  }
+
+  static getOption(key) {
+    return localStorage.getItem(key);
   }
 
   static isExists(key) {
