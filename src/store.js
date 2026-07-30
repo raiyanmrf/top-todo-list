@@ -3,7 +3,7 @@ import { TODO_PREFIX } from "./asset/utility.js";
 export default class Store {
   static setItems(items) {
     items.forEach((item) => {
-      localStorage.setItem(item.keyName, JSON.stringify(item));
+      localStorage.setItem(item.id, JSON.stringify(item));
     });
   }
   static getItem(key) {

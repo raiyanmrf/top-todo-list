@@ -164,7 +164,7 @@ export default class Template {
   }
 
   static todoList(obj) {
-    const { id, keyName, title } = obj;
+    const { id, title } = obj;
 
     const heading = DOM.create("h3", { class: "list-title" }, [title]);
     const todos = Store.itemsByProp("listId", id).map((item) =>
@@ -176,7 +176,7 @@ export default class Template {
       "section",
       {
         id,
-        "data-key": keyName,
+        "data-key": id,
         class: "todo-list",
       },
       [heading, ul],
@@ -189,7 +189,7 @@ export default class Template {
 
   static todoTemplate(todoObj) {
     console.log(todoObj);
-    let { id, keyName, title, priority, desc, date, note, label } = todoObj;
+    let { id, title, priority, desc, date, note, label } = todoObj;
 
     const checkbox = DOM.create("input", {
       class: "checkbox",
@@ -217,7 +217,7 @@ export default class Template {
       "li",
       {
         id,
-        "data-key": keyName,
+        "data-key": id,
         class: "todo",
       },
       [checkbox, title, actions, date, priority, label],
@@ -254,10 +254,9 @@ export default class Template {
       for (const [key, value] of formData) {
         obj[key] = value;
       }
-      obj.keyName = PREFIX + obj.title;
       Store.setItems([obj]);
 
-      console.log(Store.getItem(obj.keyName));
+      console.log(Store.getItem(obj.id));
     });
   }
   static actionEvent(selector) {

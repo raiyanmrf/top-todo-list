@@ -10,7 +10,7 @@ export default class Todo {
     label = "",
     note = "",
   ) {
-    this.id = crypto.randomUUID();
+    this.id = TODO_PREFIX + crypto.randomUUID();
     this.title = title;
     this.desc = desc;
     this.date = date;
@@ -18,7 +18,6 @@ export default class Todo {
     this.priority = priority;
     this.listId = listId;
     this.note = note;
-    this.keyName = TODO_PREFIX + title;
     this.label = label;
   }
 }

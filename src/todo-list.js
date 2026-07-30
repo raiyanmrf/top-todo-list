@@ -5,7 +5,6 @@ export default class TodoList {
     this.title = title;
     this.desc = desc;
     this.status = "active";
-    this.id = crypto.randomUUID();
-    this.keyName = LIST_PREFIX + title;
+    this.id = LIST_PREFIX + crypto.randomUUID();
   }
 }
