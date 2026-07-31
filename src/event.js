@@ -21,15 +21,14 @@ export default class Events {
 
       switch (action) {
         case "save-todo-list":
-          Store.setItems([obj]);
-          Store.setOption(ACTIVE_LIST, obj.id);
+          Events.handleSaveTodoList(obj);
           break;
 
         case "save-todo":
-          Store.setItems([obj]);
+          Events.handleSaveTodo(obj);
           break;
       }
-
+      elem.parentNode.parentNode.remove(); // form > modal-content > modal
       console.log(Store.getItem(obj.id));
     });
   }
@@ -59,9 +58,11 @@ export default class Events {
           break;
         case "add-todo-list":
           Template.addFormToContent(Template.todoListForm());
+
           break;
         case "add-todo":
           Template.addFormToContent(Template.todoForm());
+
           break;
         case "close":
           elem.parentNode.remove();
@@ -72,5 +73,16 @@ export default class Events {
           break;
       }
     });
+  }
+
+  static handleSaveTodoList(obj) {
+    Store.setItems([obj]);
+    Store.setOption(ACTIVE_LIST, obj.id);
+    Template.loadAside();
+    Template.loadTodoList();
+  }
+  static handleSaveTodo(obj) {
+    Store.setItems([obj]);
+    Template.loadTodoList();
   }
 }
