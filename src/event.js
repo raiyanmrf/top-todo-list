@@ -44,8 +44,7 @@ export default class Events {
 
       switch (action) {
         case "navigate":
-          Store.setOption(ACTIVE_LIST, target.id);
-          Template.loadTodoList();
+          Events.handleNavigation(target.id);
           break;
         case "add-todo-list":
           Template.addFormToContent(Template.todoListForm());
@@ -54,8 +53,7 @@ export default class Events {
           Template.addFormToContent(Template.todoForm());
           break;
         case "mark":
-          const statusValue = target.checked ? "complete" : "incomplete";
-          Store.setProp("status", statusValue, elem.id);
+          Events.handleTaskComplete(elem.id);
           break;
         case "edit-todo":
           Template.addFormToContent(Template.todoForm(Store.getItem(elem.id)));
@@ -74,6 +72,14 @@ export default class Events {
     });
   }
 
+  static handleTaskComplete(id) {
+    const statusValue = target.checked ? "complete" : "incomplete";
+    Store.setProp("status", statusValue, id);
+  }
+  static handleNavigation(id) {
+    Store.setOption(ACTIVE_LIST, id);
+    Template.loadTodoList();
+  }
   static handleSaveTodoList(obj) {
     Store.setItems([obj]);
     Store.setOption(ACTIVE_LIST, obj.id);
