@@ -47,15 +47,6 @@ export default class Events {
           Store.setOption(ACTIVE_LIST, target.id);
           Template.loadTodoList();
           break;
-        case "mark":
-          console.log("action name: mark");
-          break;
-        case "edit":
-          console.log("action name: edit");
-          break;
-        case "delete-todo":
-          Events.handleDeleteTodo(elem.id);
-          break;
         case "add-todo-list":
           Template.addFormToContent(Template.todoListForm());
 
@@ -64,6 +55,16 @@ export default class Events {
           Template.addFormToContent(Template.todoForm());
 
           break;
+        case "mark":
+          console.log("action name: mark");
+          break;
+        case "edit-todo":
+          console.log("action name: edit");
+          break;
+        case "delete-todo":
+          Events.handleDeleteTodo(elem.id);
+          break;
+
         case "close":
           elem.parentNode.remove();
           break;
