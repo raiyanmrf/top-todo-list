@@ -1,3 +1,4 @@
+import { ACTIVE_LIST } from "./asset/utility.js";
 import Store from "./store.js";
 import Template from "./template.js";
 
@@ -15,7 +16,19 @@ export default class Events {
       for (const [key, value] of formData) {
         obj[key] = value;
       }
-      Store.setItems([obj]);
+
+      const action = elem.getAttribute("data-action");
+
+      switch (action) {
+        case "save-todo-list":
+          Store.setItems([obj]);
+          Store.setOption(ACTIVE_LIST, obj.id);
+          break;
+
+        case "save-todo":
+          Store.setItems([obj]);
+          break;
+      }
 
       console.log(Store.getItem(obj.id));
     });
@@ -32,7 +45,8 @@ export default class Events {
 
       switch (action) {
         case "navigate":
-          console.log("action name: navigate");
+          Store.setOption(ACTIVE_LIST, target.id);
+          Template.loadTodoList();
           break;
         case "mark":
           console.log("action name: mark");
@@ -50,7 +64,7 @@ export default class Events {
           Template.addFormToContent(Template.todoForm());
           break;
         case "close":
-          elem.remove();
+          elem.parentNode.remove();
           break;
 
         default:
