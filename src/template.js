@@ -250,7 +250,7 @@ export default class Template {
     const actions = DOM.create(
       "span",
       { class: "actions" },
-      Template.actionBtns(),
+      Template.todoActionButtons(),
     );
 
     title = DOM.create("span", { class: "title" }, [title]);
@@ -278,16 +278,16 @@ export default class Template {
     return li;
   }
 
-  static actionBtns() {
+  static todoActionButtons() {
     return [
       DOM.create(
         "button",
-        { id: "edit", class: "action-btn", "data-action": "edit" },
+        { id: "edit", class: "action-btn", "data-action": "edit-todo" },
         ["E"],
       ),
       DOM.create(
         "button",
-        { id: "delete", class: "action-btn", "data-action": "delete" },
+        { id: "delete", class: "action-btn", "data-action": "delete-todo" },
         ["D"],
       ),
     ];
