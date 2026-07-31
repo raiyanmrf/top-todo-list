@@ -49,22 +49,20 @@ export default class Events {
           break;
         case "add-todo-list":
           Template.addFormToContent(Template.todoListForm());
-
           break;
         case "add-todo":
           Template.addFormToContent(Template.todoForm());
-
           break;
         case "mark":
           console.log("action name: mark");
           break;
         case "edit-todo":
           console.log("action name: edit");
+          Template.addFormToContent(Template.todoForm(Store.getItem(elem.id)));
           break;
         case "delete-todo":
           Events.handleDeleteTodo(elem.id);
           break;
-
         case "close":
           elem.parentNode.remove();
           break;
