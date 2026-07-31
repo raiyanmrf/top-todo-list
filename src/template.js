@@ -85,6 +85,7 @@ export default class Template {
         placeholder,
         id: objName + name,
         value,
+        required: attrs.required ? attrs.required : false,
       },
       children,
     );
@@ -108,7 +109,7 @@ export default class Template {
             label: "Title",
             value: todoList.title,
             objName: todoList.id,
-            children: [],
+            required: true,
           }),
           Template.textBox("textarea", {
             type: "",
@@ -153,6 +154,7 @@ export default class Template {
             label: "Title",
             value: todo.title,
             objName: todo.id,
+            required: true,
           }),
           Template.textBox("textarea", {
             type: "",
