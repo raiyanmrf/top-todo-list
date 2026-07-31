@@ -19,24 +19,29 @@ export default class Template {
     this.main = DOM.select(CONTENT_ID);
     this.aside = DOM.select(SIDEBAR_ID);
     this.todoLists = Store.getByKey(LIST_PREFIX);
+    this.activeListKey = Store.getOption(ACTIVE_LIST);
   }
 
-  loadTodoLists() {
-    this.todoLists.forEach((todoList) =>
-      this.main.append(Template.todoList(todoList)),
-    );
+  loadTodoList() {
+    let activeList = Store.getItem(this.activeListKey);
+    if (activeList) this.main.append(Template.todoList());
   }
 
   loadAside() {
     let links = [];
     this.todoLists.forEach((item) => {
-      let btn = DOM.create("button", {}, [item.title]);
-      links.push(DOM.create("div", { class: "link", id: item.id }, [btn]));
+      links.push(
+        DOM.create(
+          "button",
+          { class: "link", id: item.id, "data-action": "navigate" },
+          [item.title],
+        ),
+      );
     });
 
     let addBtn = DOM.create(
       "button",
-      { class: "add-btn", id: "add-todo-list" },
+      { class: "add-btn", "data-action": "add-todo-list" },
       ["Add New List"],
     );
 
@@ -195,9 +200,10 @@ export default class Template {
       Template.todoTemplate(item),
     );
 
+    console.log(todos);
     const addBtn = DOM.create(
       "button",
-      { class: "add-btn", id: "add-todo" },
+      { class: "add-btn", id: "add-todo", "data-action": "add-todo" },
       ["Add New Task"],
       "click",
     );
@@ -208,7 +214,6 @@ export default class Template {
       "section",
       {
         id,
-        "data-key": id,
         class: "todo-list",
       },
       [heading, addBtn, ul],
@@ -228,12 +233,12 @@ export default class Template {
       type: "checkbox",
       value: "1",
       id: "mark",
+      "data-action": "mark",
     });
     const actions = DOM.create(
       "span",
       { class: "actions" },
       Template.actionBtns(),
-      "click",
     );
 
     title = DOM.create("span", { class: "title" }, [title]);
@@ -250,10 +255,10 @@ export default class Template {
       "li",
       {
         id,
-        "data-key": id,
         class: "todo",
       },
       [checkbox, title, actions, date, priority, label],
+      "click",
     );
 
     // console.log(li);
@@ -263,13 +268,21 @@ export default class Template {
 
   static actionBtns() {
     return [
-      DOM.create("button", { id: "edit", class: "action-btn" }, ["E"]),
-      DOM.create("button", { id: "delete", class: "action-btn" }, ["D"]),
+      DOM.create(
+        "button",
+        { id: "edit", class: "action-btn", "data-action": "edit" },
+        ["E"],
+      ),
+      DOM.create(
+        "button",
+        { id: "delete", class: "action-btn", "data-action": "delete" },
+        ["D"],
+      ),
     ];
   }
   static formBtns() {
     return DOM.create("div", { class: "form-submit" }, [
-      DOM.create("button", { typr: "submit-btn" }, ["Save"]),
+      DOM.create("button", { type: "submit", "data-action": "save" }, ["Save"]),
     ]);
   }
 
@@ -287,7 +300,11 @@ export default class Template {
   }
 
   static createModal(elem) {
-    const closeBtn = DOM.create("span", { id: "close-btn" }, ["\u00D7"]);
+    const closeBtn = DOM.create(
+      "span",
+      { id: "close-btn", "data-action": "close" },
+      ["\u00D7"],
+    );
     const modalContent = DOM.create("div", { class: "modal-content" }, [
       closeBtn,
       elem,

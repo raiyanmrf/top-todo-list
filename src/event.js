@@ -28,9 +28,12 @@ export default class Events {
       const tagName = target.tagName;
       // console.log(target.tagName);
 
-      let action = target.id;
+      let action = target.getAttribute("data-action");
 
       switch (action) {
+        case "navigate":
+          console.log("action name: navigate");
+          break;
         case "mark":
           console.log("action name: mark");
           break;
@@ -46,10 +49,14 @@ export default class Events {
         case "add-todo":
           Template.addFormToContent(Template.todoForm());
           break;
-        case "close-btn":
+        case "close":
           elem.remove();
+          break;
+        case "save":
+          elem.remove();
+          break;
         default:
-          console.log("action name: navigate");
+          console.log("action name: not specified");
           break;
       }
     });

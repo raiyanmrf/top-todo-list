@@ -6,7 +6,7 @@ import Template from "./template.js";
 
 const App = () => {
   const template = new Template();
-  template.loadTodoLists();
+  template.loadTodoList();
   template.loadAside();
 };
 
