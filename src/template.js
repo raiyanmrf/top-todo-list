@@ -21,9 +21,14 @@ export default class Template {
   }
 
   static loadTodoList() {
-    const content = DOM.select(CONTENT_ID);
     let activeList = Store.getItem(Store.getOption(ACTIVE_LIST));
-    if (activeList) content.append(Template.todoList(activeList));
+    if (activeList) {
+      const content = DOM.select(CONTENT_ID);
+      const todoListTemplate = Template.todoList(activeList);
+
+      if (!DOM.replaceWith(todoListTemplate, ".todo-list"))
+        content.append(todoListTemplate);
+    }
   }
 
   static loadAside() {
