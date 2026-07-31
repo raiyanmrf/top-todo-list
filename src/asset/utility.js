@@ -2,6 +2,7 @@ export const LIST_PREFIX = "{{todolistzz}}";
 export const TODO_PREFIX = "{{todozz}}";
 
 export const ACTIVE_LIST = "active-todoList";
+export const NOT_FIRST_TIME = TODO_PREFIX + "FreshStart";
 export const SIDEBAR_ID = "#sidebar";
 export const CONTENT_ID = "#content";
 export const MODAL_CLASS = ".modal";
