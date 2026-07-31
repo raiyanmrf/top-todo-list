@@ -37,7 +37,7 @@ export default class Events {
     Events.create("click", elem, function (e) {
       e.stopPropagation();
       const target = e.target;
-      const tagName = target.tagName;
+
       // console.log(target.tagName);
 
       let action = target.getAttribute("data-action");
@@ -53,8 +53,8 @@ export default class Events {
         case "edit":
           console.log("action name: edit");
           break;
-        case "delete":
-          console.log("action name: delete");
+        case "delete-todo":
+          Events.handleDeleteTodo(elem.id);
           break;
         case "add-todo-list":
           Template.addFormToContent(Template.todoListForm());
@@ -83,6 +83,10 @@ export default class Events {
   }
   static handleSaveTodo(obj) {
     Store.setItems([obj]);
+    Template.loadTodoList();
+  }
+  static handleDeleteTodo(id) {
+    Store.removeItem(id);
     Template.loadTodoList();
   }
 }
