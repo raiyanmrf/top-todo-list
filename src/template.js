@@ -238,7 +238,7 @@ export default class Template {
 
   static todoTemplate(todoObj) {
     // console.log(todoObj);
-    let { id, title, priority, desc, date, note, label } = todoObj;
+    let { id, title, priority, desc, date, note, label, status } = todoObj;
 
     const checkbox = DOM.create("input", {
       class: "checkbox",
@@ -246,6 +246,7 @@ export default class Template {
       value: "1",
       id: "mark",
       "data-action": "mark",
+      checked: status === "incomplete" ? false : true,
     });
     const actions = DOM.create(
       "span",
