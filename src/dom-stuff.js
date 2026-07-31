@@ -1,4 +1,4 @@
-import Template from "./template.js";
+import Events from "./event.js";
 
 export default class DOM {
   static create(tag, attrs = {}, children = [], event = "") {
@@ -16,11 +16,11 @@ export default class DOM {
 
     switch (event) {
       case "click":
-        Template.clickEvent(elem);
+        Events.click(elem);
         break;
 
       case "submit":
-        Template.submitEvent(elem);
+        Events.submit(elem);
         break;
     }
     return elem;
@@ -32,10 +32,6 @@ export default class DOM {
 
   static selectAll(identifier) {
     return document.querySelectorAll(identifier);
-  }
-
-  static createEvent(event, elem, callback) {
-    elem.addEventListener(event, callback);
   }
 
   static replaceWith(newElem, oldElemSelector) {
