@@ -78,7 +78,7 @@ export default class Events {
   static handleSaveTodoList(obj) {
     Store.setItems([obj]);
     Store.setOption(ACTIVE_LIST, obj.id);
-    Template.loadAside();
+    Template.loadSidebar();
     Template.loadTodoList();
   }
   static handleSaveTodo(obj) {

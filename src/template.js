@@ -16,7 +16,7 @@ import Events from "./event.js";
 
 export default class Template {
   constructor() {
-    Template.loadAside();
+    Template.loadSidebar();
     Template.loadTodoList();
   }
 
@@ -31,8 +31,8 @@ export default class Template {
     }
   }
 
-  static loadAside() {
-    const sidebar = DOM.select(SIDEBAR_ID);
+  static loadSidebar() {
+    const body = DOM.select("body");
     const todoLists = Store.getByKey(LIST_PREFIX);
     let links = [];
     todoLists.forEach((item) => {
@@ -51,9 +51,13 @@ export default class Template {
       ["Add New List"],
     );
 
-    sidebar.append(...links, addBtn);
-
-    Events.click(sidebar);
+    const newSidebar = DOM.create(
+      "aside",
+      { id: "sidebar" },
+      [...links, addBtn],
+      "click",
+    );
+    if (!DOM.replaceWith(newSidebar, SIDEBAR_ID)) body.append(newSidebar);
   }
   static radioBtns(items, defaultValue, name) {
     let radios = items.map((item) => {
