@@ -16,20 +16,21 @@ import Events from "./event.js";
 
 export default class Template {
   constructor() {
-    this.main = DOM.select(CONTENT_ID);
-    this.aside = DOM.select(SIDEBAR_ID);
-    this.todoLists = Store.getByKey(LIST_PREFIX);
-    this.activeListKey = Store.getOption(ACTIVE_LIST);
+    Template.loadAside();
+    Template.loadTodoList();
   }
 
-  loadTodoList() {
-    let activeList = Store.getItem(this.activeListKey);
-    if (activeList) this.main.append(Template.todoList());
+  static loadTodoList() {
+    const content = DOM.select(CONTENT_ID);
+    let activeList = Store.getItem(Store.getOption(ACTIVE_LIST));
+    if (activeList) content.append(Template.todoList(activeList));
   }
 
-  loadAside() {
+  static loadAside() {
+    const sidebar = DOM.select(SIDEBAR_ID);
+    const todoLists = Store.getByKey(LIST_PREFIX);
     let links = [];
-    this.todoLists.forEach((item) => {
+    todoLists.forEach((item) => {
       links.push(
         DOM.create(
           "button",
@@ -45,9 +46,9 @@ export default class Template {
       ["Add New List"],
     );
 
-    this.aside.append(...links, addBtn);
+    sidebar.append(...links, addBtn);
 
-    Events.click(this.aside);
+    Events.click(sidebar);
   }
   static radioBtns(items, defaultValue, name) {
     let radios = items.map((item) => {
@@ -98,7 +99,7 @@ export default class Template {
   static todoListForm(todoList = new TodoList()) {
     let form = DOM.create(
       "form",
-      { id: "todo-list-form", class: "form" },
+      { id: "todo-list-form", class: "form", "data-action": "save-todo-list" },
       [
         DOM.create("input", { type: "hidden", name: "id", value: todoList.id }),
         Template.formInputs([
@@ -132,7 +133,7 @@ export default class Template {
   static todoForm(todo = new Todo()) {
     let form = DOM.create(
       "form",
-      { id: "todo-form", class: "form" },
+      { id: "todo-form", class: "form", "data-action": "save-todo" },
       [
         DOM.create("input", { type: "hidden", name: "id", value: todo.id }),
         DOM.create("input", {
@@ -143,7 +144,7 @@ export default class Template {
         DOM.create("input", {
           type: "hidden",
           name: "listId",
-          value: todo.listId,
+          value: DOM.select(".todo-list").id,
         }),
 
         Template.formInputs([
@@ -306,17 +307,13 @@ export default class Template {
       "span",
       { id: "close-btn", "data-action": "close" },
       ["\u00D7"],
+      "click",
     );
     const modalContent = DOM.create("div", { class: "modal-content" }, [
       closeBtn,
       elem,
     ]);
 
-    return DOM.create(
-      "div",
-      { class: "modal" },
-      [closeBtn, modalContent],
-      "click",
-    );
+    return DOM.create("div", { class: "modal" }, [closeBtn, modalContent]);
   }
 }
