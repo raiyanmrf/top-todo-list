@@ -85,90 +85,100 @@ export default class Template {
     return DOM.create("div", { class: "selectBox" }, children);
   }
   static todoListForm(todoList = new TodoList()) {
-    let form = DOM.create("form", { id: "todo-list-form", class: "form" }, [
-      DOM.create("input", { type: "hidden", name: "id", value: todoList.id }),
-      Template.formInputs([
-        Template.textBox("input", {
-          type: "text",
-          name: "title",
-          placeholder: "e.g. Office Equipments",
-          label: "Title",
-          value: todoList.title,
-          objName: todoList.id,
-          children: [],
-        }),
-        Template.textBox("textarea", {
-          type: "",
-          name: "desc",
-          placeholder: "e.g. Get the coffee machine fixed.",
-          label: "Desc..",
-          value: todoList.desc,
-          objName: todoList.id,
-          children: [todoList.desc],
-        }),
-      ]),
+    let form = DOM.create(
+      "form",
+      { id: "todo-list-form", class: "form" },
+      [
+        DOM.create("input", { type: "hidden", name: "id", value: todoList.id }),
+        Template.formInputs([
+          Template.textBox("input", {
+            type: "text",
+            name: "title",
+            placeholder: "e.g. Office Equipments",
+            label: "Title",
+            value: todoList.title,
+            objName: todoList.id,
+            children: [],
+          }),
+          Template.textBox("textarea", {
+            type: "",
+            name: "desc",
+            placeholder: "e.g. Get the coffee machine fixed.",
+            label: "Desc..",
+            value: todoList.desc,
+            objName: todoList.id,
+            children: [todoList.desc],
+          }),
+        ]),
 
-      Template.formBtns(),
-    ]);
+        Template.formBtns(),
+      ],
+      "submit",
+    );
 
     return form;
   }
   static todoForm(todo) {
-    let form = DOM.create("form", { id: "todo-form", class: "form" }, [
-      DOM.create("input", { type: "hidden", name: "id", value: todo.id }),
-      DOM.create("input", {
-        type: "hidden",
-        name: "status",
-        value: todo.status,
-      }),
-      DOM.create("input", {
-        type: "hidden",
-        name: "listId",
-        value: todo.listId,
-      }),
-
-      Template.formInputs([
-        Template.textBox("input", {
-          type: "text",
-          name: "title",
-          placeholder: "e.g. Office Equipments",
-          label: "Title",
-          value: todo.title,
-          objName: todo.id,
+    let form = DOM.create(
+      "form",
+      { id: "todo-form", class: "form" },
+      [
+        DOM.create("input", { type: "hidden", name: "id", value: todo.id }),
+        DOM.create("input", {
+          type: "hidden",
+          name: "status",
+          value: todo.status,
         }),
-        Template.textBox("textarea", {
-          type: "",
-          name: "desc",
-          placeholder: "e.g. Get the coffe machine fixed.",
-          label: "Desc..",
-          value: todo.desc,
-          objName: todo.id,
+        DOM.create("input", {
+          type: "hidden",
+          name: "listId",
+          value: todo.listId,
         }),
 
-        Template.selectBox([
-          DOM.create(
-            "input",
-            { type: "date", value: todo.date, name: "date" },
-            [todo.date],
-          ),
-          Template.radioBtns(
-            ["low", "medium", "high"],
-            todo.priority,
-            "priority",
-          ),
+        Template.formInputs([
+          Template.textBox("input", {
+            type: "text",
+            name: "title",
+            placeholder: "e.g. Office Equipments",
+            label: "Title",
+            value: todo.title,
+            objName: todo.id,
+          }),
+          Template.textBox("textarea", {
+            type: "",
+            name: "desc",
+            placeholder: "e.g. Get the coffe machine fixed.",
+            label: "Desc..",
+            value: todo.desc,
+            objName: todo.id,
+          }),
+
+          Template.selectBox([
+            DOM.create(
+              "input",
+              { type: "date", value: todo.date, name: "date" },
+              [todo.date],
+            ),
+            Template.radioBtns(
+              ["low", "medium", "high"],
+              todo.priority,
+              "priority",
+            ),
+          ]),
+
+          Template.textBox("textarea", {
+            type: "",
+            name: "note",
+            placeholder: "e.g. Get the coffe machine fixed.",
+            label: "Note..",
+            value: todo.note,
+            objName: todo.id,
+          }),
         ]),
-
-        Template.textBox("textarea", {
-          type: "",
-          name: "note",
-          placeholder: "e.g. Get the coffe machine fixed.",
-          label: "Note..",
-          value: todo.note,
-          objName: todo.id,
-        }),
-      ]),
-      Template.formBtns(),
-    ]);
+        Template.formBtns(),
+      ],
+      "submit",
+    );
     return form;
   }
 
@@ -179,6 +189,14 @@ export default class Template {
     const todos = Store.itemsByProp("listId", id).map((item) =>
       Template.todoTemplate(item),
     );
+
+    const addBtn = DOM.create(
+      "button",
+      { class: "add-todo", id: id },
+      ["+"],
+      "click",
+    );
+
     const ul = DOM.create("ul", { class: "todos" }, todos);
 
     const section = DOM.create(
@@ -210,6 +228,7 @@ export default class Template {
       "span",
       { class: "actions" },
       Template.actionBtns(),
+      "click",
     );
 
     title = DOM.create("span", { class: "title" }, [title]);
@@ -302,13 +321,10 @@ export default class Template {
   static addFormToContent(form) {
     const modal = Template.createModal(form);
 
-    if (!DOM.replaceWith(modal, MODAL_ID)) {
+    if (!DOM.replaceWith(modal, MODAL_CLASS)) {
       const content = DOM.select(CONTENT_ID);
       content.append(modal);
     }
-
-    Template.clickEvent(modal);
-    Template.submitEvent(form);
   }
 
   static createModal(elem) {
@@ -318,6 +334,11 @@ export default class Template {
       elem,
     ]);
 
-    return modal;
+    return DOM.create(
+      "div",
+      { class: "modal" },
+      [closeBtn, modalContent],
+      "click",
+    );
   }
 }

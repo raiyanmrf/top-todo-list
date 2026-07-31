@@ -1,5 +1,7 @@
+import Template from "./template.js";
+
 export default class DOM {
-  static create(tag, attrs = {}, children = []) {
+  static create(tag, attrs = {}, children = [], event = "") {
     let elem = document.createElement(tag);
 
     if (attrs) {
@@ -10,6 +12,16 @@ export default class DOM {
 
     if (children) {
       elem.append(...children);
+    }
+
+    switch (event) {
+      case "click":
+        Template.clickEvent(elem);
+        break;
+
+      case "submit":
+        Template.submitEvent(elem);
+        break;
     }
     return elem;
   }
