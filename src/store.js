@@ -1,6 +1,11 @@
 import { TODO_PREFIX } from "./asset/utility.js";
 
 export default class Store {
+  static setItem(item) {
+    localStorage.setItem(item.id, JSON.stringify(item));
+
+    return item;
+  }
   static setItems(items) {
     items.forEach((item) => {
       localStorage.setItem(item.id, JSON.stringify(item));
