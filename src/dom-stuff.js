@@ -4,6 +4,9 @@ export default class DOM {
   static create(tag, attrs = {}, children = [], event = "") {
     let elem = document.createElement(tag);
 
+    return DOM.update(elem, attrs, children, event);
+  }
+  static update(elem, attrs = {}, children = [], event = "") {
     if (attrs) {
       for (const [key, value] of Object.entries(attrs)) {
         if (typeof value === "boolean") {
