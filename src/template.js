@@ -10,6 +10,8 @@ import {
   SIDEBAR_ID,
 } from "./asset/utility.js";
 import TodoList from "./todo-list.js";
+import Todo from "./todo.js";
+import { hoursToMilliseconds } from "date-fns/fp";
 
 export default class Template {
   constructor() {
@@ -31,9 +33,11 @@ export default class Template {
       links.push(DOM.create("div", { class: "link", id: item.id }, [btn]));
     });
 
-    let addBtn = DOM.create("button", { class: "add-btn", id: "add-list" }, [
-      "Add New List",
-    ]);
+    let addBtn = DOM.create(
+      "button",
+      { class: "add-btn", id: "add-todo-list" },
+      ["Add New List"],
+    );
 
     this.aside.append(...links, addBtn);
 
@@ -118,7 +122,7 @@ export default class Template {
 
     return form;
   }
-  static todoForm(todo) {
+  static todoForm(todo = new Todo()) {
     let form = DOM.create(
       "form",
       { id: "todo-form", class: "form" },
@@ -192,8 +196,8 @@ export default class Template {
 
     const addBtn = DOM.create(
       "button",
-      { class: "add-todo", id: id },
-      ["+"],
+      { class: "add-btn", id: "add-todo" },
+      ["Add New Task"],
       "click",
     );
 
@@ -206,7 +210,7 @@ export default class Template {
         "data-key": id,
         class: "todo-list",
       },
-      [heading, ul],
+      [heading, addBtn, ul],
     );
 
     // console.log(todos);
@@ -306,8 +310,11 @@ export default class Template {
         case "delete":
           console.log("action name: delete");
           break;
-        case "add-list":
+        case "add-todo-list":
           Template.addFormToContent(Template.todoListForm());
+          break;
+        case "add-todo":
+          Template.addFormToContent(Template.todoForm());
           break;
         case "close-btn":
           elem.remove();
