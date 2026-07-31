@@ -218,7 +218,18 @@ export default class Template {
   static todoList(obj) {
     const { id, title } = obj;
 
+    const todoListActions = DOM.create(
+      "span",
+      { class: "actions" },
+      Template.actionButtons(false),
+      "click",
+    );
     const heading = DOM.create("h3", { class: "list-title" }, [title]);
+
+    const listHeader = DOM.create("div", { class: "list-header" }, [
+      heading,
+      todoListActions,
+    ]);
     const todos = Store.itemsByProp("listId", id).map((item) =>
       Template.todoTemplate(item),
     );
@@ -239,7 +250,7 @@ export default class Template {
         id,
         class: "todo-list",
       },
-      [heading, addBtn, ul],
+      [listHeader, addBtn, ul],
     );
 
     // console.log(todos);
@@ -262,7 +273,7 @@ export default class Template {
     const actions = DOM.create(
       "span",
       { class: "actions" },
-      Template.todoActionButtons(),
+      Template.actionButtons(),
     );
 
     title = DOM.create("span", { class: "title" }, [title]);
@@ -290,16 +301,17 @@ export default class Template {
     return li;
   }
 
-  static todoActionButtons() {
+  static actionButtons(isTodo = true) {
+    let actionSuffix = isTodo ? "" : "-list";
     return [
       DOM.create(
         "button",
-        { id: "edit", class: "action-btn", "data-action": "edit-todo" },
+        { class: "action-btn", "data-action": `edit-todo${actionSuffix}` },
         ["E"],
       ),
       DOM.create(
         "button",
-        { id: "delete", class: "action-btn", "data-action": "delete-todo" },
+        { class: "action-btn", "data-action": `delete-todo${actionSuffix}` },
         ["D"],
       ),
     ];
