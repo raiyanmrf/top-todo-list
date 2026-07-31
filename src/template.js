@@ -4,6 +4,7 @@ import DateTime from "./date-time.js";
 import {
   ACTIVE_LIST,
   CONTENT_ID,
+  NOT_FIRST_TIME,
   LIST_PREFIX,
   MODAL_CLASS,
   MODAL_CONTENT_CLASS,
@@ -16,10 +17,20 @@ import Events from "./event.js";
 
 export default class Template {
   constructor() {
+    Template.defaultState();
     Template.loadSidebar();
     Template.loadTodoList();
   }
 
+  static defaultState() {
+    if (!Store.isExists(NOT_FIRST_TIME)) {
+      const defaultTodoList = Store.setItem(
+        new TodoList("My Tasks", "My Task Description"),
+      );
+      Store.setOption(ACTIVE_LIST, defaultTodoList.id);
+      Store.setOption(NOT_FIRST_TIME, true);
+    }
+  }
   static loadTodoList() {
     let activeList = Store.getItem(Store.getOption(ACTIVE_LIST));
     if (activeList) {
