@@ -52,9 +52,7 @@ export default class Events {
         case "close":
           elem.remove();
           break;
-        case "save":
-          elem.remove();
-          break;
+
         default:
           console.log("action name: not specified");
           break;
