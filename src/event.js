@@ -54,10 +54,10 @@ export default class Events {
           Template.addFormToContent(Template.todoForm());
           break;
         case "mark":
-          console.log("action name: mark");
+          const statusValue = target.checked ? "complete" : "incomplete";
+          Store.setProp("status", statusValue, elem.id);
           break;
         case "edit-todo":
-          console.log("action name: edit");
           Template.addFormToContent(Template.todoForm(Store.getItem(elem.id)));
           break;
         case "delete-todo":
