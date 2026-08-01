@@ -1,4 +1,5 @@
 import { ACTIVE_LIST } from "./asset/utility.js";
+import DOM from "./dom-stuff.js";
 import Store from "./store.js";
 import Template from "./template.js";
 
@@ -49,6 +50,12 @@ export default class Events {
         case "add-todo-list":
           Template.addFormToContent(Template.todoListForm());
           break;
+        case "edit-todo-list":
+          Events.handleEditTodoList();
+          break;
+        case "delete-todo-list":
+          Events.handleDeleteTodoList();
+          break;
         case "add-todo":
           Template.addFormToContent(Template.todoForm());
           break;
@@ -72,6 +79,10 @@ export default class Events {
     });
   }
 
+  static handleEditTodoList() {
+    const todoListID = DOM.select(".todo-list").id;
+    Template.addFormToContent(Template.todoListForm(Store.getItem(todoListID)));
+  }
   static handleTaskComplete(id) {
     const statusValue = target.checked ? "complete" : "incomplete";
     Store.setProp("status", statusValue, id);
@@ -89,6 +100,19 @@ export default class Events {
   static handleSaveTodo(obj) {
     Store.setItems([obj]);
     Template.loadTodoList();
+  }
+  static handleDeleteTodoList() {
+    if (
+      !confirm(
+        "Deleting this tasklist will also delete all the tasks under it. Do we want to proceed?",
+      )
+    )
+      return;
+    const todoListID = DOM.select(".todo-list").id;
+    Store.removeMatchingItemsWithProp("listId", todoListID);
+    Store.removeItem(todoListID);
+    Store.setOption(ACTIVE_LIST, "");
+    location.reload();
   }
   static handleDeleteTodo(id) {
     Store.removeItem(id);
