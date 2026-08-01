@@ -338,7 +338,7 @@ export default class Template {
   static createModal(elem) {
     const closeBtn = DOM.create(
       "span",
-      { id: "close-btn", "data-action": "close" },
+      { class: "close-btn", "data-action": "close" },
       ["\u00D7"],
       "click",
     );
