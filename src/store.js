@@ -73,4 +73,11 @@ export default class Store {
 
     return items;
   }
+  static removeMatchingItemsWithProp(prop, propValue, prefix = TODO_PREFIX) {
+    for (const key of Object.keys(localStorage)) {
+      if (!key.includes(prefix)) continue;
+      // console.log(key);
+      if (Store.getPropValue(prop, key) === propValue) Store.removeItem(key);
+    }
+  }
 }
