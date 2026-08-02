@@ -30,11 +30,11 @@ export default class Events {
           break;
       }
       elem.parentNode.parentNode.remove(); // form > modal-content > modal
-      console.log(Store.getItem(obj.id));
+      // console.log(Store.getItem(obj.id));
     });
   }
   static click(elem) {
-    console.log(elem);
+    // console.log(elem);
     Events.create("click", elem, function (e) {
       e.stopPropagation();
       const target = e.target;
