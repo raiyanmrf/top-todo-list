@@ -43,9 +43,12 @@ export default class Events {
 
       let action = target.getAttribute("data-action");
 
-      if (target.tagName == "svg")
+      console.log(target.checked);
+      if (target.tagName == "svg") {
         action = target.parentNode.getAttribute("data-action");
-
+      } else if (target.tagName == "path") {
+        action = target.parentNode.parentNode.getAttribute("data-action");
+      }
       switch (action) {
         case "navigate":
           Events.handleNavigation(target.id);
@@ -63,7 +66,7 @@ export default class Events {
           Template.addFormToContent(Template.todoForm());
           break;
         case "mark":
-          Events.handleTaskComplete(elem.id);
+          Events.handleTaskComplete(target, elem.id);
           break;
         case "edit-todo":
           Template.addFormToContent(Template.todoForm(Store.getItem(elem.id)));
@@ -86,7 +89,7 @@ export default class Events {
     const todoListID = DOM.select(".todo-list").id;
     Template.addFormToContent(Template.todoListForm(Store.getItem(todoListID)));
   }
-  static handleTaskComplete(id) {
+  static handleTaskComplete(target, id) {
     const statusValue = target.checked ? "complete" : "incomplete";
     Store.setProp("status", statusValue, id);
   }
