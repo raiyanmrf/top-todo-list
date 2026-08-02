@@ -1,6 +1,5 @@
 * {
   box-sizing: border-box;
-  line-height: 1.5;
   margin: 0;
   padding: 0;
 }
@@ -33,9 +32,6 @@ body {
     sans-serif;
 }
 
-body > * {
-  padding: 15px;
-}
 header {
   grid-area: header;
   display: flex;
@@ -98,47 +94,73 @@ span.close-btn {
 }
 
 .list-header {
+  padding: 0 10px;
   display: flex;
   justify-content: flex-start;
-  gap: 10px;
+  gap: 5px;
   align-items: center;
+  margin-bottom: 10px;
 }
 
 .todo-list .add-btn {
-  padding: 0;
+  padding: 0 7px;
 }
-
 .todo {
-  margin-top: 10px;
-  display: grid;
+  padding: 10px;
+}
+.todo {
   width: fit-content;
-  grid-template-areas:
-    "checkbox title priority actions"
-    ".  date date label";
-
-  column-gap: 0.3rem;
-  row-gap: 0.3rem;
+  list-style: none;
 }
 
 .checkbox {
-  grid-area: checkbox;
+  margin-inline-end: 5px;
+}
+.upper-todo-section {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
+.lower-todo-section {
+  margin-left: 22px;
+  opacity: 0;
+  visibility: hidden;
+  transition: ease-in 0.2s;
+}
+.todo:hover .lower-todo-section {
+  visibility: inherit;
+  opacity: 1;
+}
 .title {
-  grid-area: title;
+  font-size: large;
+  font-weight: 500;
+  line-height: 0.5;
 }
-
+.desc {
+  font-size: smaller;
+  color: rgb(134, 134, 134);
+}
 .actions {
-  grid-area: actions;
   width: fit-content;
   display: flex;
   justify-content: flex-start;
-  align-items: center;
-  gap: 5px;
-  justify-self: flex-end;
+  align-items: flex-start;
+  position: relative;
+  top: -2px;
+  opacity: 0;
+  line-height: 0;
+}
+
+li:hover .actions {
+  opacity: 1;
+}
+.list-header:hover .actions {
+  opacity: 1;
 }
 
 .actions button {
+  font-size: small;
   padding: 0;
 }
 .actions svg {
@@ -146,17 +168,18 @@ span.close-btn {
 }
 
 .priority {
-  grid-area: priority;
+  font-size: x-small;
+  padding: 0px 4px;
+  border-radius: 5px;
+  font-weight: 500;
 }
 
 .date {
-  grid-area: date;
-}
+  font-size: 11px;
+  color: #333;
+  line-height: 1;
 
-.label {
-  grid-area: label;
-
-  justify-self: flex-end;
+  font-weight: 500;
 }
 
 .txt-red {
@@ -191,7 +214,23 @@ svg {
 .add-btn svg {
   fill: rgba(5, 67, 149, 0.815);
 }
+.add-btn {
+  color: rgba(0, 40, 92, 0.815);
+}
 
 .delete-btn:hover svg {
   fill: red;
+}
+
+.priority svg {
+  width: 12px;
+}
+.priority.low svg {
+  fill: rgba(0, 41, 128, 0.888);
+}
+.priority.medium svg {
+  fill: rgba(255, 166, 0, 0.863);
+}
+.priority.high svg {
+  fill: rgba(255, 0, 0, 0.87);
 }
