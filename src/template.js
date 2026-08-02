@@ -12,6 +12,7 @@ import {
   pencilSVG,
   trashSVG,
   plusSVG,
+  closeSVG,
 } from "./asset/utility.js";
 import TodoList from "./todo-list.js";
 import Todo from "./todo.js";
@@ -62,7 +63,7 @@ export default class Template {
     let addBtn = DOM.create(
       "button",
       { class: "add-btn", "data-action": "add-todo-list" },
-      [DOM.HTMLtoElem(plusSVG), "New List"],
+      ["New List", DOM.HTMLtoElem(plusSVG)],
     );
 
     const newSidebar = DOM.create(
@@ -309,12 +310,18 @@ export default class Template {
     return [
       DOM.create(
         "button",
-        { class: "action-btn", "data-action": `edit-todo${actionSuffix}` },
+        {
+          class: "action-btn edit-btn",
+          "data-action": `edit-todo${actionSuffix}`,
+        },
         [DOM.HTMLtoElem(pencilSVG)],
       ),
       DOM.create(
         "button",
-        { class: "action-btn", "data-action": `delete-todo${actionSuffix}` },
+        {
+          class: "action-btn delete-btn",
+          "data-action": `delete-todo${actionSuffix}`,
+        },
         [DOM.HTMLtoElem(trashSVG)],
       ),
     ];
@@ -342,7 +349,7 @@ export default class Template {
     const closeBtn = DOM.create(
       "span",
       { class: "close-btn", "data-action": "close" },
-      ["\u00D7"],
+      [DOM.HTMLtoElem(closeSVG)],
       "click",
     );
     const modalContent = DOM.create("div", { class: "modal-content" }, [
