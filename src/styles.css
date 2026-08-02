@@ -164,7 +164,7 @@ li:hover .actions {
   padding: 0;
 }
 .actions svg {
-  width: 18px;
+  width: 16px;
 }
 
 .priority {
@@ -178,7 +178,7 @@ li:hover .actions {
   font-size: 11px;
   color: #333;
   line-height: 1;
-
+  margin-left: 5px;
   font-weight: 500;
 }
 
