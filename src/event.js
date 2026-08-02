@@ -43,6 +43,9 @@ export default class Events {
 
       let action = target.getAttribute("data-action");
 
+      if (target.tagName == "svg")
+        action = target.parentNode.getAttribute("data-action");
+
       switch (action) {
         case "navigate":
           Events.handleNavigation(target.id);
