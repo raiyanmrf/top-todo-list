@@ -13,6 +13,7 @@ import {
   trashSVG,
   plusSVG,
   closeSVG,
+  bookMarkSVG,
 } from "./asset/utility.js";
 import TodoList from "./todo-list.js";
 import Todo from "./todo.js";
@@ -230,10 +231,6 @@ export default class Template {
     );
     const heading = DOM.create("h3", { class: "list-title" }, [title]);
 
-    const listHeader = DOM.create("div", { class: "list-header" }, [
-      heading,
-      todoListActions,
-    ]);
     const todos = Store.itemsByProp("listId", id).map((item) =>
       Template.todoTemplate(item),
     );
@@ -245,7 +242,11 @@ export default class Template {
       [DOM.HTMLtoElem(plusSVG), "New Task"],
       "click",
     );
-
+    const listHeader = DOM.create("div", { class: "list-header" }, [
+      heading,
+      addBtn,
+      todoListActions,
+    ]);
     const ul = DOM.create("ul", { class: "todos" }, todos);
 
     const section = DOM.create(
@@ -254,7 +255,7 @@ export default class Template {
         id,
         class: "todo-list",
       },
-      [listHeader, addBtn, ul],
+      [listHeader, ul],
     );
 
     // console.log(todos);
@@ -281,7 +282,11 @@ export default class Template {
     );
 
     title = DOM.create("span", { class: "title" }, [title]);
-    priority = DOM.create("span", { class: "priority" }, [priority]);
+    priority = DOM.create(
+      "span",
+      { class: `priority ${priority}`, title: priority },
+      [DOM.HTMLtoElem(bookMarkSVG)],
+    );
     desc = DOM.create("span", { class: "desc" }, [desc]);
     date = DOM.create(
       "span",
@@ -290,13 +295,29 @@ export default class Template {
     );
     label = DOM.create("span", { class: "label" }, [label]);
 
+    const upperSection = DOM.create("div", { class: "upper-todo-section" }, [
+      checkbox,
+      title,
+      priority,
+      date,
+      actions,
+    ]);
+    const lowerSection =
+      desc.textContent.length > 0
+        ? DOM.create("div", { class: "lower-todo-section" }, [desc])
+        : "";
+
+    const div = DOM.create("div", { class: "todo-section" }, [
+      upperSection,
+      lowerSection,
+    ]);
     const li = DOM.create(
       "li",
       {
         id,
         class: "todo",
       },
-      [checkbox, title, actions, date, priority, label],
+      [div],
       "click",
     );
 
