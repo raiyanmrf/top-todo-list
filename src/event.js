@@ -41,14 +41,15 @@ export default class Events {
 
       // console.log(target.tagName);
 
-      let action = target.getAttribute("data-action");
+      let action;
 
-      console.log(target.checked);
+      // console.log(target);
       if (target.tagName == "svg") {
         action = target.parentNode.getAttribute("data-action");
       } else if (target.tagName == "path") {
         action = target.parentNode.parentNode.getAttribute("data-action");
       }
+      action = target.getAttribute("data-action");
       switch (action) {
         case "navigate":
           Events.handleNavigation(target.id);
