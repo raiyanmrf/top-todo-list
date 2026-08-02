@@ -8,35 +8,9 @@ export const CONTENT_ID = "#content";
 export const MODAL_CLASS = ".modal";
 export const MODAL_CONTENT_CLASS = ".modal-content";
 
-// let defaultTodoList = new TodoList(
-//   "My Todo List",
-//   "Description of My Todo List",
-// );
-// let defaultTodo = new Todo(
-//   "My Todo",
-//   defaultTodoList.id,
-//   "Description of My Todo.",
-//   "2026-07-24",
-//   "low",
-//   "#work",
-//   "this is a test",
-// );
-// let defaultTodoList2 = new TodoList(
-//   "My Todo List 2",
-//   "Description of My Todo List",
-// );
-// let defaultTodo2 = new Todo(
-//   "My Todo 2",
-//   defaultTodoList2.id,
-//   "Description of My Todo.",
-//   "2026-07-24",
-//   "low",
-//   "#work",
-//   "this is a test",
-// );
-// Store.setItems([
-//   defaultTodoList,
-//   defaultTodo,
-//   defaultTodoList2,
-//   defaultTodo2,
-// ]);
+// SVG
+
+export const plusSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>plus</title><path d="M19,13H13V19H11V13H5V11H11V5H13V11H19V13Z" /></svg>`;
+export const pencilSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>pencil</title><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" /></svg>`;
+export const trashSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>delete</title><path d="M19,4H15.5L14.5,3H9.5L8.5,4H5V6H19M6,19A2,2 0 0,0 8,21H16A2,2 0 0,0 18,19V7H6V19Z" /></svg>`;
+export const closeSVG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>close</title><path d="M19,6.41L17.59,5L12,10.59L6.41,5L5,6.41L10.59,12L5,17.59L6.41,19L12,13.41L17.59,19L19,17.59L13.41,12L19,6.41Z" /></svg>`;
