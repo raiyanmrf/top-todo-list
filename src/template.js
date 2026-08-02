@@ -234,7 +234,7 @@ export default class Template {
       Template.todoTemplate(item),
     );
 
-    console.log(todos);
+    // console.log(todos);
     const addBtn = DOM.create(
       "button",
       { class: "add-btn", id: "add-todo", "data-action": "add-todo" },
