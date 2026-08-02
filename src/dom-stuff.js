@@ -10,7 +10,7 @@ export default class DOM {
     if (attrs) {
       for (const [key, value] of Object.entries(attrs)) {
         if (typeof value === "boolean") {
-          console.log(key, value);
+          // console.log(key, value);
           elem[key] = value;
         } else elem.setAttribute(key, value);
       }
