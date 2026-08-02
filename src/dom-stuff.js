@@ -51,9 +51,10 @@ export default class DOM {
     return false;
   }
 
-  static svg(svgHTML) {
-    let span = DOM.create("span", { class: "icon" });
-    span.innerHTML = svgHTML;
-    return span;
+  static HTMLtoElem(stringHTML) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(stringHTML, "text/html");
+
+    return doc.body.firstElementChild;
   }
 }
