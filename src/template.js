@@ -125,12 +125,13 @@ export default class Template {
       "form",
       { id: "todo-list-form", class: "form", "data-action": "save-todo-list" },
       [
+        DOM.create("h4", { class: "form-title" }, ["TODO LIST.."]),
         DOM.create("input", { type: "hidden", name: "id", value: todoList.id }),
         Template.formInputs([
           Template.textBox("input", {
             type: "text",
             name: "title",
-            placeholder: "Title of the Task List",
+            placeholder: "Title of the Todo List",
 
             value: todoList.title,
             objName: todoList.id,
@@ -150,6 +151,7 @@ export default class Template {
       "form",
       { id: "todo-form", class: "form", "data-action": "save-todo" },
       [
+        DOM.create("h4", { class: "form-title" }, ["TODO.."]),
         DOM.create("input", { type: "hidden", name: "id", value: todo.id }),
         DOM.create("input", {
           type: "hidden",
