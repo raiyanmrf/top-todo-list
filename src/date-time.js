@@ -3,6 +3,7 @@ import { formatRelative, isPast } from "date-fns";
 export default class DateTime {
   static format(baseDate) {
     if (!baseDate) return "";
+    // console.log(baseDate);
     let formattedDate = formatRelative(new Date(baseDate), new Date()).replace(
       /at\s\d+:\d+\s[A-Z]+/i,
       "",
