@@ -130,8 +130,8 @@ export default class Template {
           Template.textBox("input", {
             type: "text",
             name: "title",
-            placeholder: "Office Equipments",
-            label: "Title",
+            placeholder: "Title of the Task List",
+
             value: todoList.title,
             objName: todoList.id,
             required: true,
@@ -166,8 +166,7 @@ export default class Template {
           Template.textBox("input", {
             type: "text",
             name: "title",
-            placeholder: "Office Equipments",
-            label: "Title",
+            placeholder: "Title of the Task",
             value: todo.title,
             objName: todo.id,
             required: true,
@@ -177,8 +176,8 @@ export default class Template {
             {
               type: "",
               name: "desc",
-              placeholder: "Get the coffe machine fixed.",
-              label: "Desc..",
+              placeholder: "Description..",
+
               objName: todo.id,
             },
             [todo.desc],
