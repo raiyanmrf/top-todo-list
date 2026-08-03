@@ -48,12 +48,16 @@ export default class Template {
   static loadSidebar() {
     const body = DOM.select("body");
     const todoLists = Store.getByKey(LIST_PREFIX);
-    let links = [];
+    const activeList = Store.getItem(Store.getOption(ACTIVE_LIST));
+    const links = [];
+
     todoLists.forEach((item) => {
+      let linkClass =
+        activeList && item.id === activeList.id ? "link active" : "link";
       links.push(
         DOM.create(
           "button",
-          { class: "link", id: item.id, "data-action": "navigate" },
+          { class: linkClass, id: item.id, "data-action": "navigate" },
           [item.title],
         ),
       );
