@@ -266,7 +266,7 @@ export default class Template {
       checked: status === "incomplete" ? false : true,
     });
 
-    const statusClass = status === "incomplete" ? "complete" : "";
+    const statusClass = status === "complete" ? "complete" : "";
 
     const actions = DOM.create(
       "span",
@@ -274,7 +274,7 @@ export default class Template {
       Template.actionButtons(),
     );
 
-    title = DOM.create("span", { class: `title ${statusClass}` }, [title]);
+    title = DOM.create("span", { class: `title` }, [title]);
     priority = DOM.create(
       "span",
       { class: `priority ${priority}`, title: priority },
