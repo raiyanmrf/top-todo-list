@@ -118,6 +118,8 @@ export default class Events {
   static handleNavigation(id) {
     Store.setOption(ACTIVE_LIST, id);
     Template.loadTodoList();
+    const modal = DOM.select(".modal");
+    modal && modal.remove();
   }
   static handleSaveTodoList(obj) {
     Store.setItems([obj]);
