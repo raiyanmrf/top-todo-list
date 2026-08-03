@@ -8,7 +8,7 @@ body {
   display: grid;
   padding: 0;
   margin: 0;
-  grid-template-columns: 200px 1fr 1fr;
+  grid-template-columns: minmax(200px, 250px) 1fr 1fr;
   grid-template-rows: 60px calc(100vh - 65px);
 
   grid-template-areas:
@@ -36,31 +36,35 @@ header {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: #fafafa;
   padding-inline: 5px;
-  color: #605f5f;
+  background-color: black;
+  color: white;
 }
 
 #sidebar {
   grid-area: sidebar;
   display: flex;
   flex-direction: column;
-  background-color: #fafafa;
+  background-color: black;
+  color: white;
 }
 
 #sidebar .add-btn {
   margin-top: auto;
   font-size: 2rem;
+  color: white;
 }
 
 #sidebar .add-btn svg {
   width: 30px;
+  fill: white;
 }
 #content {
   grid-area: contents;
   padding-block-start: 24px;
   padding-inline: 10px;
   position: relative;
+  overflow-y: auto;
 }
 
 form * {
@@ -163,6 +167,13 @@ span.close-btn {
   margin-bottom: 10px;
 }
 
+.list-title {
+  font-size: x-large;
+  position: relative;
+  top: -4px;
+  color: #222;
+}
+
 .todo-list .add-btn {
   padding: 0 7px;
 }
@@ -187,7 +198,7 @@ span.close-btn {
   margin-left: 22px;
 }
 .title {
-  font-size: large;
+  font-size: medium;
   font-weight: 500;
   position: relative;
   top: -7px;
@@ -311,4 +322,14 @@ li.complete .title {
   top: -2px;
   text-transform: uppercase;
   color: gray;
+}
+
+.link {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+}
+
+.link.active {
+  font-size: 1.2rem;
 }
