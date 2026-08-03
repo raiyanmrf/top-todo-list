@@ -94,8 +94,8 @@ export default class Template {
 
     return DOM.create("span", { class: "radio-btns" }, [...radios]);
   }
-  static textBox(tag, attrs) {
-    const { type, name, placeholder, label, value, objName, children } = attrs;
+  static textBox(tag, attrs = {}, children = []) {
+    const { type, name, placeholder, label, objName } = attrs;
 
     let labelElem = label
       ? DOM.create("label", { class: "input-label", for: objName + name }, [
@@ -110,13 +110,13 @@ export default class Template {
         name,
         placeholder,
         id: objName + name,
-        value,
         required: attrs.required ? attrs.required : false,
         maxlength: tag === "textarea" ? 200 : 100,
       },
       children,
     );
 
+    attrs.value && input.setAttribute("value", attrs.value);
     return DOM.create("div", { class: "textBox" }, [labelElem, input]);
   }
   static selectBox(children) {
@@ -138,15 +138,18 @@ export default class Template {
             objName: todoList.id,
             required: true,
           }),
-          Template.textBox("textarea", {
-            type: "",
-            name: "desc",
-            placeholder: "e.g. Get the coffee machine fixed.",
-            label: "Desc..",
-            value: todoList.desc,
-            objName: todoList.id,
-            children: [todoList.desc],
-          }),
+          Template.textBox(
+            "textarea",
+            {
+              type: "",
+              name: "desc",
+              placeholder: "e.g. Get the coffee machine fixed.",
+              label: "Desc..",
+              value: todoList.desc,
+              objName: todoList.id,
+            },
+            [todoList.desc],
+          ),
         ]),
 
         Template.formBtns(),
@@ -183,14 +186,17 @@ export default class Template {
             objName: todo.id,
             required: true,
           }),
-          Template.textBox("textarea", {
-            type: "",
-            name: "desc",
-            placeholder: "e.g. Get the coffe machine fixed.",
-            label: "Desc..",
-            value: todo.desc,
-            objName: todo.id,
-          }),
+          Template.textBox(
+            "textarea",
+            {
+              type: "",
+              name: "desc",
+              placeholder: "e.g. Get the coffe machine fixed.",
+              label: "Desc..",
+              objName: todo.id,
+            },
+            [todo.desc],
+          ),
 
           Template.selectBox([
             DOM.create(
