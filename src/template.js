@@ -184,15 +184,15 @@ export default class Template {
           ),
 
           Template.selectbox([
-            DOM.create(
-              "input",
-              { type: "date", value: todo.date, name: "date" },
-              [todo.date],
-            ),
             Template.radioBtns(
               ["low", "medium", "high"],
               todo.priority,
               "priority",
+            ),
+            DOM.create(
+              "input",
+              { type: "date", value: todo.date, name: "date" },
+              [todo.date],
             ),
           ]),
         ]),
