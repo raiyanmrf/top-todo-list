@@ -29,7 +29,7 @@ export default class Template {
 
   static defaultState() {
     if (!Store.isExists(NOT_FIRST_TIME)) {
-      const defaultTodoList = Store.setItem(new TodoList("My Tasks"));
+      const defaultTodoList = Store.setItem(new TodoList("My Todo List"));
       Store.setOption(ACTIVE_LIST, defaultTodoList.id);
       Store.setOption(NOT_FIRST_TIME, true);
     }
