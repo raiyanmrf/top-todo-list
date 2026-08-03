@@ -269,3 +269,11 @@ svg {
 .priority.high svg {
   fill: rgba(255, 0, 0, 0.87);
 }
+
+li.complete {
+  opacity: 0.5;
+}
+
+li.complete .title {
+  text-decoration: line-through;
+}
