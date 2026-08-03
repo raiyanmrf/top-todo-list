@@ -29,9 +29,7 @@ export default class Template {
 
   static defaultState() {
     if (!Store.isExists(NOT_FIRST_TIME)) {
-      const defaultTodoList = Store.setItem(
-        new TodoList("My Tasks", "My Task Description"),
-      );
+      const defaultTodoList = Store.setItem(new TodoList("My Tasks"));
       Store.setOption(ACTIVE_LIST, defaultTodoList.id);
       Store.setOption(NOT_FIRST_TIME, true);
     }
@@ -132,24 +130,12 @@ export default class Template {
           Template.textBox("input", {
             type: "text",
             name: "title",
-            placeholder: "e.g. Office Equipments",
+            placeholder: "Office Equipments",
             label: "Title",
             value: todoList.title,
             objName: todoList.id,
             required: true,
           }),
-          Template.textBox(
-            "textarea",
-            {
-              type: "",
-              name: "desc",
-              placeholder: "e.g. Get the coffee machine fixed.",
-              label: "Desc..",
-              value: todoList.desc,
-              objName: todoList.id,
-            },
-            [todoList.desc],
-          ),
         ]),
 
         Template.formBtns(),
@@ -180,7 +166,7 @@ export default class Template {
           Template.textBox("input", {
             type: "text",
             name: "title",
-            placeholder: "e.g. Office Equipments",
+            placeholder: "Office Equipments",
             label: "Title",
             value: todo.title,
             objName: todo.id,
@@ -191,7 +177,7 @@ export default class Template {
             {
               type: "",
               name: "desc",
-              placeholder: "e.g. Get the coffe machine fixed.",
+              placeholder: "Get the coffe machine fixed.",
               label: "Desc..",
               objName: todo.id,
             },
@@ -210,15 +196,6 @@ export default class Template {
               "priority",
             ),
           ]),
-
-          Template.textBox("textarea", {
-            type: "",
-            name: "note",
-            placeholder: "e.g. Get the coffe machine fixed.",
-            label: "Note..",
-            value: todo.note,
-            objName: todo.id,
-          }),
         ]),
         Template.formBtns(),
       ],
@@ -272,7 +249,7 @@ export default class Template {
 
   static todoTemplate(todoObj) {
     // console.log(todoObj);
-    let { id, title, priority, desc, date, note, label, status } = todoObj;
+    let { id, title, priority, desc, date, label, status } = todoObj;
 
     const checkbox = DOM.create("input", {
       class: "checkbox",
