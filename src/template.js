@@ -112,6 +112,7 @@ export default class Template {
         id: objName + name,
         value,
         required: attrs.required ? attrs.required : false,
+        maxlength: tag === "textarea" ? 200 : 100,
       },
       children,
     );
@@ -288,10 +289,14 @@ export default class Template {
       [DOM.HTMLtoElem(bookMarkSVG)],
     );
     desc = DOM.create("span", { class: "desc" }, [desc]);
+
+    let dateFormat = DateTime.format(date).trim();
+    let isToday = dateFormat === "today";
+    let isPast = DateTime.isLate(date) && !isToday;
     date = DOM.create(
       "span",
-      { class: `date ${DateTime.isLate(date) ? "txt-red" : ""}` },
-      [DateTime.format(date)],
+      { class: `date ${isPast ? "txt-red" : isToday ? "txt-green" : ""}` },
+      [dateFormat],
     );
     label = DOM.create("span", { class: "label" }, [label]);
 
