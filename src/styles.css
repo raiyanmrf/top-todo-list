@@ -101,6 +101,9 @@ form * {
   border: 0.5px solid rgb(232, 232, 232);
 }
 
+.textbox textarea {
+  height: 84px;
+}
 .selectbox {
   display: flex;
   align-items: flex-start;
