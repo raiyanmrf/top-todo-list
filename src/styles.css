@@ -292,3 +292,13 @@ li.complete {
 li.complete .title {
   text-decoration: line-through;
 }
+
+.selectbox input[type="date"] {
+  width: 107px;
+  border: none;
+  color: #503400;
+  position: relative;
+  top: -2px;
+  text-transform: uppercase;
+  color: gray;
+}
