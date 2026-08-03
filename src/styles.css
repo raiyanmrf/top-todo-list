@@ -334,5 +334,59 @@ li.complete .title {
 }
 
 .link.active {
-  font-size: 1.2rem;
+  font-size: 1.3rem;
+}
+
+@media screen and (max-width: 800px) {
+  body {
+    display: grid;
+    padding: 0;
+    margin: 0;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 60px auto calc(100vh - 65px);
+
+    grid-template-areas:
+      "header header header"
+      "sidebar sidebar sidebar"
+      "contents contents contents";
+  }
+
+  #sidebar {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  #sidebar .add-btn {
+    margin-inline-start: auto;
+  }
+
+  .link {
+    font-size: small;
+  }
+  .link.active {
+    font-size: medium;
+  }
+
+  #sidebar .add-btn {
+    font-size: 1rem;
+  }
+  #sidebar .add-btn svg {
+    width: 20px;
+  }
+
+  .list-title {
+    font-size: large;
+  }
+  .title {
+    font-size: small;
+    top: -1px;
+  }
+
+  .desc {
+    font-size: x-small;
+  }
+
+  .textbox input {
+    width: 250px;
+  }
 }
