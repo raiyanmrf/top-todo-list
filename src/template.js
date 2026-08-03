@@ -266,7 +266,7 @@ export default class Template {
       checked: status === "incomplete" ? false : true,
     });
 
-    const statusClass = status === "complete" ? "complete" : "";
+    const liClass = status === "complete" ? "todo complete" : "todo";
 
     const actions = DOM.create(
       "span",
@@ -312,7 +312,7 @@ export default class Template {
       "li",
       {
         id,
-        class: `todo  ${statusClass}`,
+        class: liClass,
       },
       [div],
       "click",
