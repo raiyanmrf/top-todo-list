@@ -68,7 +68,7 @@ export default class Events {
           Events.handleTaskComplete(target, elem.id);
           break;
         case "edit-todo":
-          Template.addFormToContent(Template.todoForm(Store.getItem(elem.id)));
+          Events.handleEditTodo(elem.id);
           break;
         case "delete-todo":
           Events.handleDeleteTodo(elem.id);
@@ -87,6 +87,11 @@ export default class Events {
   static handleEditTodoList() {
     const todoListID = DOM.select(".todo-list").id;
     Template.addFormToContent(Template.todoListForm(Store.getItem(todoListID)));
+  }
+  static handleEditTodo(id) {
+    const todo = Store.getItem(id);
+    console.log(todo);
+    Template.addFormToContent(Template.todoForm(todo));
   }
   static handleTaskComplete(target, id) {
     const statusValue = target.checked ? "complete" : "incomplete";
