@@ -214,10 +214,14 @@ export default class Template {
     );
     const heading = DOM.create("h3", { class: "list-title" }, [title]);
 
-    const todos = Store.itemsByProp("listId", id).map((item) =>
-      Template.todoTemplate(item),
-    );
+    const todos = Store.itemsByProp("listId", id);
 
+    const completeTodos = todos
+      .filter((todo) => todo.status === "complete")
+      .map((item) => Template.todoTemplate(item));
+    const incompleteTodos = todos
+      .filter((todo) => todo.status === "incomplete")
+      .map((item) => Template.todoTemplate(item));
     // console.log(todos);
     const addBtn = DOM.create(
       "button",
@@ -230,7 +234,10 @@ export default class Template {
       addBtn,
       todoListActions,
     ]);
-    const ul = DOM.create("ul", { class: "todos" }, todos);
+    const ul = DOM.create("ul", { class: "todos" }, [
+      ...incompleteTodos,
+      ...completeTodos,
+    ]);
 
     const section = DOM.create(
       "section",
