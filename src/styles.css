@@ -62,6 +62,38 @@ form * {
   font-family: inherit;
 }
 
+.textbox {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.textbox label {
+  font-weight: 500;
+  font-size: 0.8rem;
+  line-height: 0;
+  color: #333 !important;
+}
+.textbox input,
+.textbox textarea {
+  width: 301px;
+  min-width: 100%;
+  padding: 3px 5px;
+  border: 0.5px solid rgb(232, 232, 232);
+}
+
+.selectbox {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.radio-btns {
+}
+
+.radio-btn {
+}
 svg {
   max-width: 100%;
   width: 20px;
