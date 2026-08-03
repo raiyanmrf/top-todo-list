@@ -117,6 +117,7 @@ export default class Events {
   }
   static handleNavigation(id) {
     Store.setOption(ACTIVE_LIST, id);
+    Template.loadSidebar();
     Template.loadTodoList();
     const modal = DOM.select(".modal");
     modal && modal.remove();
