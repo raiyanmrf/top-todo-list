@@ -78,7 +78,7 @@ export default class Events {
           break;
 
         default:
-          console.log("action name: not specified");
+          // console.log("action name: not specified");
           break;
       }
     });
@@ -90,7 +90,7 @@ export default class Events {
   }
   static handleEditTodo(id) {
     const todo = Store.getItem(id);
-    console.log(todo);
+    // console.log(todo);
     Template.addFormToContent(Template.todoForm(todo));
   }
   static handleTaskComplete(target, elem) {
@@ -108,7 +108,7 @@ export default class Events {
       [],
       "click",
     );
-    console.log("clone", clone);
+    // console.log("clone", clone);
     setTimeout(() => {
       elem.remove();
       if (statusValue === "complete") todos.append(clone);
