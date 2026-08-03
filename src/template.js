@@ -363,6 +363,7 @@ export default class Template {
       const content = DOM.select(CONTENT_ID);
       content.append(modal);
     }
+    DOM.scrollIntoView(modal);
   }
 
   static createModal(elem) {
