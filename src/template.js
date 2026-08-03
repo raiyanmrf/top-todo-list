@@ -265,13 +265,16 @@ export default class Template {
       "data-action": "mark",
       checked: status === "incomplete" ? false : true,
     });
+
+    const statusClass = status === "incomplete" ? "complete" : "";
+
     const actions = DOM.create(
       "span",
       { class: "actions" },
       Template.actionButtons(),
     );
 
-    title = DOM.create("span", { class: "title" }, [title]);
+    title = DOM.create("span", { class: `title ${statusClass}` }, [title]);
     priority = DOM.create(
       "span",
       { class: `priority ${priority}`, title: priority },
@@ -309,7 +312,7 @@ export default class Template {
       "li",
       {
         id,
-        class: "todo",
+        class: `todo  ${statusClass}`,
       },
       [div],
       "click",
