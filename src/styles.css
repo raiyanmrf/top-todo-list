@@ -90,13 +90,28 @@ form * {
 .selectbox {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 15px;
 }
 
 .radio-btns {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  font-size: 12px;
+  gap: 3px;
 }
 
 .radio-btn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.radio-btn label {
+  position: relative;
+  top: -2px;
+  font-weight: 500;
 }
 svg {
   max-width: 100%;
