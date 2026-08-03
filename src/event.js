@@ -65,7 +65,7 @@ export default class Events {
           Template.addFormToContent(Template.todoForm());
           break;
         case "mark":
-          Events.handleTaskComplete(target, elem.id);
+          Events.handleTaskComplete(target, elem);
           break;
         case "edit-todo":
           Events.handleEditTodo(elem.id);
@@ -93,9 +93,27 @@ export default class Events {
     console.log(todo);
     Template.addFormToContent(Template.todoForm(todo));
   }
-  static handleTaskComplete(target, id) {
+  static handleTaskComplete(target, elem) {
+    // console.log("clicked", target);
+    // console.log("elem", elem);
+    const todos = DOM.select(".todos");
     const statusValue = target.checked ? "complete" : "incomplete";
-    Store.setProp("status", statusValue, id);
+    const liClass = target.checked ? "todo complete" : "todo";
+    Store.setProp("status", statusValue, elem.id);
+
+    DOM.update(elem, { class: liClass });
+    const clone = DOM.update(
+      elem.cloneNode(true),
+      { class: liClass },
+      [],
+      "click",
+    );
+    console.log("clone", clone);
+    setTimeout(() => {
+      elem.remove();
+      if (statusValue === "complete") todos.append(clone);
+      else todos.prepend(clone);
+    }, 300);
   }
   static handleNavigation(id) {
     Store.setOption(ACTIVE_LIST, id);
