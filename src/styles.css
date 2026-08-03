@@ -124,13 +124,6 @@ span.close-btn {
 
 .lower-todo-section {
   margin-left: 22px;
-  opacity: 0;
-  visibility: hidden;
-  transition: ease-in 0.2s;
-}
-.todo:hover .lower-todo-section {
-  visibility: inherit;
-  opacity: 1;
 }
 .title {
   font-size: large;
@@ -140,6 +133,9 @@ span.close-btn {
 .desc {
   font-size: smaller;
   color: rgb(134, 134, 134);
+  max-width: 60ch;
+  display: inline-block;
+  overflow-wrap: anywhere;
 }
 .actions {
   width: fit-content;
@@ -150,6 +146,7 @@ span.close-btn {
   top: -2px;
   opacity: 0;
   line-height: 0;
+  margin-left: 5px;
 }
 
 li:hover .actions {
@@ -184,6 +181,9 @@ li:hover .actions {
 
 .txt-red {
   color: red;
+}
+.txt-green {
+  color: green;
 }
 
 .modal {
