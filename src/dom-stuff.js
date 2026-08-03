@@ -57,4 +57,12 @@ export default class DOM {
 
     return doc.body.firstElementChild;
   }
+
+  static scrollIntoView(elem) {
+    elem.scrollIntoView({
+      behavior: "smooth",
+      block: "end",
+      inline: "nearest",
+    });
+  }
 }
