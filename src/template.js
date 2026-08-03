@@ -117,10 +117,10 @@ export default class Template {
     );
 
     attrs.value && input.setAttribute("value", attrs.value);
-    return DOM.create("div", { class: "textBox" }, [labelElem, input]);
+    return DOM.create("div", { class: "textbox" }, [labelElem, input]);
   }
-  static selectBox(children) {
-    return DOM.create("div", { class: "selectBox" }, children);
+  static selectbox(children) {
+    return DOM.create("div", { class: "selectbox" }, children);
   }
   static todoListForm(todoList = new TodoList()) {
     let form = DOM.create(
@@ -198,7 +198,7 @@ export default class Template {
             [todo.desc],
           ),
 
-          Template.selectBox([
+          Template.selectbox([
             DOM.create(
               "input",
               { type: "date", value: todo.date, name: "date" },
