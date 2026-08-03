@@ -67,6 +67,14 @@ form * {
   font-family: inherit;
 }
 
+.form-submit {
+  display: flex;
+  justify-content: flex-end;
+}
+.form-submit button {
+  background-color: #b8dfff;
+  padding: 3px 6px;
+}
 .textbox {
   display: flex;
   flex-direction: column;
