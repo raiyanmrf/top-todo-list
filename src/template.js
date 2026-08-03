@@ -87,7 +87,7 @@ export default class Template {
 
       item === defaultValue ? (input.checked = true) : (input.checked = false);
 
-      return DOM.create("span", { class: "radio-btn" }, [label, input]);
+      return DOM.create("span", { class: "radio-btn" }, [input, label]);
     });
 
     return DOM.create("span", { class: "radio-btns" }, [...radios]);
